@@ -90,5 +90,5 @@ news_agent = Agent(
 
 if __name__ == "__main__":
     news_agent.print_response(
-        "Trump's disapproval rating hits record high in new poll"
+        "Spotify adds 'Verified' badges to distinguish human artists from AI"
     )
