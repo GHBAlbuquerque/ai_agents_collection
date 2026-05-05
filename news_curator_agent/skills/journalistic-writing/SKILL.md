@@ -1,5 +1,5 @@
 ---
-name: writing
+name: journalistic-writing
 description: Write a professional journalistic article based on a fact-checking report, featuring an original headline, lead, inverted pyramid body, and context. Use when you need to write a news story, draft an article, produce journalistic text, or transform a dossier into a publishable news piece.
 metadata:
   version: "1.0.0"

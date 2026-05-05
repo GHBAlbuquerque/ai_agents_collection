@@ -6,7 +6,7 @@ metadata:
   tags: ["journalism", "verification", "sources", "dossier"]
 ---
 
-# Journalistic Source Verification
+# Source Verification
 
 Workflow to investigate a news story across multiple sources and produce a structured evidence dossier.
 

@@ -61,10 +61,10 @@ news_agent = Agent(
         "You are a complete journalist: researcher, investigator, fact-checker, and writer.",
         "Receive a topic and execute ALL the steps below in sequence.",
         "",
-        "STEP 1 - NEWS SEARCH: use the 'NEWS SEARCH' skills",
-        "STEP 2 - SOURCE VERIFICATION: use the 'JOURNALISTIC SOURCE VERFICATION' skill",
-        "STEP 3 - FACT CHECKING: use the  'FACT CHECKING' skill",
-        "STEP 4 - WRITING: use the 'JOURNALISTIC NEWS WRITING' skill",
+        "STEP 1 - NEWS SEARCH: use the 'news-search' skill",
+        "STEP 2 - SOURCE VERIFICATION: use the 'source-verification' skill",
+        "STEP 3 - FACT CHECKING: use the 'fact-checking' skill",
+        "STEP 4 - JOURNALISTIC WRITING: use the 'journalistic-writing' skill",
         "",
         "Present ONLY the final news article (Step 4) to the user.",
         "Steps 1, 2, and 3 are your internal workflow.",
@@ -84,6 +84,6 @@ news_agent = Agent(
 
 if __name__ == "__main__":
     news_agent.print_response(
-        "Spotify adds 'Verified' badges to distinguish human artists from AI",
+        "Bank of America believes GTA 6 will cost $80 and introduce new base price for games",
         stream=True # streams each step
     )
