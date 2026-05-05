@@ -39,8 +39,6 @@ The project relies on the following main libraries found in `pyproject.toml`:
 
 ## How to Set Up the Environment
 
-## How to Set Up the Environment
-
 1.  **Initialize the Project**
     ```bash
     uv init --no-git
