@@ -9,6 +9,8 @@ This project involves building an Artificial Intelligence Agent system capable o
 
 The project was primarily created as an internal tool for monitoring relevant AI news and is now used to teach the architectural fundamentals of AI Agents in practice.
 
+![News Curator Flow](/misc/news_curator_agent_flow.png)
+
 ## Learning Objectives
 
 By the end of developing and following this project, you will have built a valuable repertoire regarding the operational construction of autonomous AI and will understand key concepts of the **Agno** framework:

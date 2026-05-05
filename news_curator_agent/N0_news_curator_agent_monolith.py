@@ -13,7 +13,7 @@ from agno.agent import Agent
 from agno.models.openai import OpenAIResponses
 from agno.tools.websearch import WebSearchTools
 from agno.tools.file import FileTools
-from N0_news_skills import NEWS_AGENT_SKILLS
+from N0_dictionary_news_skills import NEWS_AGENT_SKILLS
 
 import os
 from dotenv import load_dotenv
@@ -28,6 +28,7 @@ load_dotenv()
 #   - list files in output dir
 # ------------------------------------------
 
+# Path to output results from news search
 output_dir = Path(__file__).parent/"output/N0"
 
 file_tools = FileTools(
@@ -67,9 +68,9 @@ news_agent = Agent(
         "Strictly follow the instructions for each stage defined in the skills below:",
         prompt_instructions,
         "",
-        "STEP 1 - RESEARCH: execute the 'NEWS SEARCH' instructions",
-        "STEP 2 - INVESTIGATION: execute the 'JOURNALISTIC SOURCE INVESTIGATION' instructions",
-        "STEP 3 - VERIFICATION: execute the 'FACTUAL VERIFICATION' instructions",
+        "STEP 1 - NEWS SEARCH: execute the 'NEWS SEARCH' instructions",
+        "STEP 2 - SOURCE VERIFICATION: execute the 'JOURNALISTIC SOURCE INVESTIGATION' instructions",
+        "STEP 3 - FACT CHECKING: execute the 'FACT CHECKING' instructions",
         "STEP 4 - WRITING: execute the 'JOURNALISTIC NEWS WRITING' instructions",
         "",
         "Present ONLY the final news article (Step 4) to the user.",
