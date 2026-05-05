@@ -13,7 +13,7 @@ from agno.agent import Agent
 from agno.models.openai import OpenAIResponses
 from agno.tools.websearch import WebSearchTools
 from agno.tools.file import FileTools
-from N0_dictionary_news_skills import NEWS_AGENT_SKILLS
+from skills.N0_dictionary_news_skills import NEWS_AGENT_SKILLS
 
 import os
 from dotenv import load_dotenv
