@@ -25,9 +25,15 @@ _Note: As this is a Level 1 project, the focus is on the base architecture and e
 
 The learning process and code are structured incrementally, represented by scripts `N0` through `N3`:
 
-* `N0_news_curator_agent.py` - Our foundation, exploring the creation of the curator using only a Single Agent (Monolithic Agent).
-* `N1`, `N2`, `N3_news_curator_agent.py` - Different iterations of the same project that evolve the architecture toward Multi-Agents, implementing the research, fact-checking, and writing stages as segregated team agents.
-* `/skills` - Isolated implementation of tools consumed in the project.
+* `N0 (Monolithic Foundation)`: Focuses on the initial implementation of the curator using a Single Agent architecture to handle all tasks within a single execution flow.
+
+* `N1 (Multi-Agent Transition)`: Begins the architectural shift by decomposing the monolithic structure into a basic Multi-Agent system to separate core responsibilities.
+
+* `N2 (Advanced Orchestration)`: Refines the agent interactions, further segregating the specialized team agents to optimize the workflow between research and content creation.
+
+* `N3 (Specialized Lifecycle)`: The most evolved iteration, implementing a fully modular team where Research, Fact-Checking, and Writing operate as distinct, specialized stages.
+
+* `Skills (Tooling)`: Serves as a centralized repository for isolated tool implementations that are consumed by the agents across the different project levels.
 
 ## Tech Stack (Dependencies)
 

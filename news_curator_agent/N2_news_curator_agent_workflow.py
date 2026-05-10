@@ -38,7 +38,7 @@ skills_dir = Path(__file__).parent/"skills"
 shared_skills = Skills(loaders=[LocalSkills(str(skills_dir))])
 
 # Path to output results from news search
-output_dir = Path(__file__).parent/"output/N1"
+output_dir = Path(__file__).parent/"output/N2"
 
 file_tools = FileTools(
     base_dir=output_dir,
