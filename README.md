@@ -2,7 +2,6 @@
 
 A centralized repository containing multiple AI agent projects built for study, learning, and experimentation. This collection explores different multi-agent architectures, tool integrations, and workflow designs.
 
----
 
 ## 📂 Projects in this Collection
 
@@ -12,7 +11,6 @@ As this collection grows, each project is isolated in its own directory with its
 
 *(More projects will be added here as the collection expands!)*
 
----
 
 ## ⚙️ Tech Stack and Setup
 
@@ -20,4 +18,4 @@ Please refer to each project's readme for specific instructions on how to run an
 
 ---
 
-Done by @GHBAlbuquerque
+Done by [@GHBAlbuquerque](https://github.com/GHBAlbuquerque)
