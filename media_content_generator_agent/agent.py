@@ -16,7 +16,6 @@ copywriter = Agent(
     name="copywriter",
     description="",
 
-
     add_history_to_context=True,
     num_history_runs=3,
 
@@ -36,4 +35,4 @@ agent_os = AgentOS(
 app = agent_os.get_app()
 
 if __name__ == "__main__":
-    agent_os.serve("agent.py:app", reload=True)
+    agent_os.serve("agent:app", reload=True)
