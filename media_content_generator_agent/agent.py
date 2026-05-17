@@ -3,7 +3,7 @@ from agno.models.openai import OpenAIChat
 from agno.tools.tavily import TavilyTools
 from agno.db.sqlite import SqliteDb
 from agno.os import AgentOS
-from transcription_reader import list_available_creators, get_creator_transcriptions
+from transcription_reader_tools import list_available_creators, get_creator_transcriptions
 
 from dotenv import load_dotenv
 load_dotenv()
