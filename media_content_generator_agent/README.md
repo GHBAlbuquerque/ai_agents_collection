@@ -1,6 +1,6 @@
-# Creator Intelligence Agent 🤖🎥
+# Media Content Generator Agent 🤖🎥
 
-An AI-powered research and content ideation engine. This project automates the process of downloading/processing videos from your favorite creators, transcribing them using **Groq Whisper**, and using an **Agno (Phidata) Agent** to brainstorm new content ideas based on their transcripts.
+An AI-powered research and content ideation engine. This project automates the process of processing videos from your favorite creators, transcribing them using **Groq Whisper**, and using an **Agno (Phidata) Agent** to brainstorm new content ideas based on their transcripts.
 
 
 ## 🚀 Workflow
