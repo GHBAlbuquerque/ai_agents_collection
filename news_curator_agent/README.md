@@ -71,3 +71,8 @@ The project relies on the following main libraries found in `pyproject.toml`:
     uv run N2_news_curator_agent.py
     uv run N3_news_curator_agent.py
     ```
+
+---
+*Project by [@AsimovAcademy](https://github.com/asimov-academy)*
+
+*Developed with ❤️  by [@GHBAlbuquerque](https://github.com/GHBAlbuquerque)*

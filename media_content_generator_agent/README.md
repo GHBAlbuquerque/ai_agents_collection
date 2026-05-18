@@ -102,5 +102,6 @@ When you make a request, **the AI will dynamically look up your database and ask
 * [Tavily](https://tavily.com/): For real-time web search capabilities.
 
 ---
+*Project by [@AsimovAcademy](https://github.com/asimov-academy)*
 
-*Developed with ❤️  by [GHBAlbuquerque](https://github.com/GHBAlbuquerque)*
+*Developed with ❤️  by [@GHBAlbuquerque](https://github.com/GHBAlbuquerque)*
