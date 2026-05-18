@@ -7,6 +7,9 @@
 
 ![Flow diagram](misc/flow-diagram.png)
 
+cd to version folder
+> dotenv run python main.py
+
 ---
 *Project by [@AsimovAcademy](https://github.com/asimov-academy)*
 
