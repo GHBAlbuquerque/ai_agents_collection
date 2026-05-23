@@ -9,6 +9,8 @@
 
 cd to version folder
 > dotenv run python main.py
+OR
+> python main.py
 
 ---
 *Project by [@AsimovAcademy](https://github.com/asimov-academy)*
