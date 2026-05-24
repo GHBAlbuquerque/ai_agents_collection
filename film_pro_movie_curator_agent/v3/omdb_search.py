@@ -6,7 +6,7 @@ import os
 import dotenv
 dotenv.load_dotenv(dotenv_path=".env", override=True)
 
-#http://www.omdbapi.com/?i=tt3896198&apikey=729906d
+#http://www.omdbapi.com/?i=tt3896198&apikey=xxxx
 async def search_movie(title: str) -> dict[str, Any] | str:
      api_key=os.getenv("OMDB_API_KEY")
      
