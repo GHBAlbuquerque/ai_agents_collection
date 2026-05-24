@@ -1,0 +1,354 @@
+{
+  "movies": [
+    {
+      "title": "Whiplash",
+      "release_year": 2014,
+      "director": "Damien Chazelle",
+      "genres": [
+        "Drama",
+        "Music"
+      ],
+      "imdb_rating": 8.5,
+      "duration_minutes": 107,
+      "primary_language": "English",
+      "synopsis": "A driven jazz drummer confronts a demanding mentor at a prestigious conservatory, testing talent and nerve.",
+      "age_rating": "18",
+      "content_warnings": [
+        "language",
+        "violence",
+        "sensitive_themes"
+      ],
+      "cast": [
+        {
+          "name": "Miles Teller",
+          "character": "Andrew Neiman"
+        },
+        {
+          "name": "J. K. Simmons",
+          "character": "Terence Fletcher"
+        }
+      ],
+      "poster_url": null,
+      "streaming_platforms": null,
+      "recommendation_reason": "An intense, claustrophobic study of ambition and mentorship in the music world, echoing Rock Star’s pressure-filled atmosphere."
+    },
+    {
+      "title": "Almost Famous",
+      "release_year": 2000,
+      "director": "Cameron Crowe",
+      "genres": [
+        "Drama",
+        "Music",
+        "Adventure"
+      ],
+      "imdb_rating": 7.9,
+      "duration_minutes": 122,
+      "primary_language": "English",
+      "synopsis": "A teenage journalist joins a rock band on tour in the 1970s, chasing fame, friendship, and the mystery of rock.",
+      "age_rating": "PG-13",
+      "content_warnings": [
+        "language",
+        "drugs",
+        "sexual_content"
+      ],
+      "cast": [
+        {
+          "name": "Patrick Fugit",
+          "character": "William Miller"
+        },
+        {
+          "name": "Kate Hudson",
+          "character": "Penny Lane"
+        }
+      ],
+      "poster_url": null,
+      "streaming_platforms": null,
+      "recommendation_reason": "A vivid, immersive look at rock touring life with coming-of-age nuance—perfect for fans of Rock Star’s industry-insider vibe."
+    },
+    {
+      "title": "Sing Street",
+      "release_year": 2016,
+      "director": "John Carney",
+      "genres": [
+        "Drama",
+        "Music",
+        "Romance"
+      ],
+      "imdb_rating": 7.9,
+      "duration_minutes": 106,
+      "primary_language": "English",
+      "synopsis": "In 1980s Dublin, a boy forms a band to escape family troubles, turning personal growth into catchy, hopeful songs.",
+      "age_rating": "PG-13",
+      "content_warnings": [
+        "language"
+      ],
+      "cast": [
+        {
+          "name": "Ferdia Walsh Peelo",
+          "character": "Conor"
+        },
+        {
+          "name": "Lucy Boynton",
+          "character": "Raphina"
+        }
+      ],
+      "poster_url": null,
+      "streaming_platforms": null,
+      "recommendation_reason": "Youthful, music-filled coming-of-age story with infectious tunes and a heartfelt look at making music under pressure."
+    },
+    {
+      "title": "La La Land",
+      "release_year": 2016,
+      "director": "Damien Chazelle",
+      "genres": [
+        "Drama",
+        "Music",
+        "Romance"
+      ],
+      "imdb_rating": 8.0,
+      "duration_minutes": 128,
+      "primary_language": "English",
+      "synopsis": "Two aspiring artists chase love and stardom in modern Los Angeles, balancing ambition against the cost of fame.",
+      "age_rating": "PG-13",
+      "content_warnings": [
+        "language",
+        "adult_themes"
+      ],
+      "cast": [
+        {
+          "name": "Emma Stone",
+          "character": "Mia Dolan"
+        },
+        {
+          "name": "Ryan Gosling",
+          "character": "Sebastian Wilder"
+        }
+      ],
+      "poster_url": null,
+      "streaming_platforms": null,
+      "recommendation_reason": "Stylish, music-driven cinema about pursuing dreams in a fame-obsessed world—an ideal match for Rock Star fans seeking emotional depth."
+    },
+    {
+      "title": "School of Rock",
+      "release_year": 2003,
+      "director": "Richard Linklater",
+      "genres": [
+        "Comedy",
+        "Music",
+        "Family"
+      ],
+      "imdb_rating": 7.1,
+      "duration_minutes": 114,
+      "primary_language": "English",
+      "synopsis": "A down-on-his-luck guitarist teaches a class of kids to form a rock band, discovering a new audience for musical rebellion.",
+      "age_rating": "PG",
+      "content_warnings": [
+        "language"
+      ],
+      "cast": [
+        {
+          "name": "Jack Black",
+          "character": "Dewey Finn"
+        },
+        {
+          "name": "Joan Cusack",
+          "character": "Ned Schneebly"
+        }
+      ],
+      "poster_url": null,
+      "streaming_platforms": null,
+      "recommendation_reason": "Playful, crowd-pleasing look at music education and performance with undeniable rock energy."
+    },
+    {
+      "title": "This Is Spinal Tap",
+      "release_year": 1984,
+      "director": "Rob Reiner",
+      "genres": [
+        "Comedy",
+        "Music",
+        "Mockumentary"
+      ],
+      "imdb_rating": 8.0,
+      "duration_minutes": 82,
+      "primary_language": "English",
+      "synopsis": "A spoof documentary follows a fictional heavy metal band on tour, satirizing rock culture with sharp wit.",
+      "age_rating": "PG-13",
+      "content_warnings": [
+        "language"
+      ],
+      "cast": [
+        {
+          "name": "Christopher Guest",
+          "character": "Nigel Tufnel"
+        },
+        {
+          "name": "Michael McKean",
+          "character": "David St. Hubbins"
+        }
+      ],
+      "poster_url": null,
+      "streaming_platforms": null,
+      "recommendation_reason": "A clever, influential spoof that parodies rock mythos while delivering genuine music-world insight—great for Rock Star fans with a sense of humor."
+    },
+    {
+      "title": "Begin Again",
+      "release_year": 2013,
+      "director": "John Carney",
+      "genres": [
+        "Drama",
+        "Music",
+        "Romance"
+      ],
+      "imdb_rating": 7.4,
+      "duration_minutes": 102,
+      "primary_language": "English",
+      "synopsis": "A chance encounter between a down-and-out producer and a gifted singer leads to an unlikely collaboration in New York's music scene.",
+      "age_rating": "PG-13",
+      "content_warnings": [
+        "language"
+      ],
+      "cast": [
+        {
+          "name": "Keira Knightley",
+          "character": "Greta"
+        },
+        {
+          "name": "Mark Ruffalo",
+          "character": "Dan Mulligan"
+        }
+      ],
+      "poster_url": null,
+      "streaming_platforms": null,
+      "recommendation_reason": "A grounded, hopeful look at collaboration and reinvention in the music industry, with intimate performances in a real-world setting."
+    },
+    {
+      "title": "A Star Is Born",
+      "release_year": 2018,
+      "director": "Bradley Cooper",
+      "genres": [
+        "Drama",
+        "Music",
+        "Romance"
+      ],
+      "imdb_rating": 7.5,
+      "duration_minutes": 136,
+      "primary_language": "English",
+      "synopsis": "A seasoned musician mentors a rising singer, while fame and personal demons threaten their relationship.",
+      "age_rating": "18",
+      "content_warnings": [
+        "language",
+        "substance_abuse",
+        "romantic_content"
+      ],
+      "cast": [
+        {
+          "name": "Lady Gaga",
+          "character": "Allie"
+        },
+        {
+          "name": "Bradley Cooper",
+          "character": "Jackson Maine"
+        }
+      ],
+      "poster_url": null,
+      "streaming_platforms": null,
+      "recommendation_reason": "A modern, intense exploration of fame, artistry, and the costs of success in the music world."
+    },
+    {
+      "title": "Inside Llewyn Davis",
+      "release_year": 2013,
+      "director": "Joel Coen and Ethan Coen",
+      "genres": [
+        "Drama",
+        "Music"
+      ],
+      "imdb_rating": 7.5,
+      "duration_minutes": 104,
+      "primary_language": "English",
+      "synopsis": "A talented but flawed folk musician navigates the 1960s New York scene, chasing opportunities while facing an uncertain future.",
+      "age_rating": "18",
+      "content_warnings": [
+        "language"
+      ],
+      "cast": [
+        {
+          "name": "Oscar Isaac",
+          "character": "Llewyn Davis"
+        },
+        {
+          "name": "Carey Mulligan",
+          "character": "Jean"
+        }
+      ],
+      "poster_url": null,
+      "streaming_platforms": null,
+      "recommendation_reason": "Moody, character-driven look at the price of chasing a music career, with a sharp Coen brothers sensibility."
+    },
+    {
+      "title": "Velvet Goldmine",
+      "release_year": 1998,
+      "director": "Todd Haynes",
+      "genres": [
+        "Drama",
+        "Music",
+        "Biographical"
+      ],
+      "imdb_rating": 7.3,
+      "duration_minutes": 114,
+      "primary_language": "English",
+      "synopsis": "A kaleidoscopic tale of a fictional glam rock icon and the era's myth-making around fame and identity.",
+      "age_rating": "18",
+      "content_warnings": [
+        "language",
+        "sexual_content",
+        "drugs"
+      ],
+      "cast": [
+        {
+          "name": "Ewan McGregor",
+          "character": "Brian Slade"
+        },
+        {
+          "name": "Jonathan Rhys Meyers",
+          "character": "Adam Cain"
+        }
+      ],
+      "poster_url": null,
+      "streaming_platforms": null,
+      "recommendation_reason": "Stylish, provocative meditation on rock myth vs. reality, appealing to fans who crave era-defining music cinema."
+    },
+    {
+      "title": "The Blues Brothers",
+      "release_year": 1980,
+      "director": "John Landis",
+      "genres": [
+        "Comedy",
+        "Music",
+        "Adventure"
+      ],
+      "imdb_rating": 7.9,
+      "duration_minutes": 133,
+      "primary_language": "English",
+      "synopsis": "Two blues-loving brothers embark on a mission to save their orphanage by reuniting their blues band and playing one last gig.",
+      "age_rating": "18",
+      "content_warnings": [
+        "language",
+        "violence"
+      ],
+      "cast": [
+        {
+          "name": "John Belushi",
+          "character": "Jake Blues"
+        },
+        {
+          "name": "Dan Aykroyd",
+          "character": "Elwood Blues"
+        }
+      ],
+      "poster_url": null,
+      "streaming_platforms": null,
+      "recommendation_reason": "High-energy musical comedy with iconic performances, ideal for fans of Rock Star's exuberant, soundtrack-driven moments."
+    }
+  ],
+  "total_recommendations": 11
+}
