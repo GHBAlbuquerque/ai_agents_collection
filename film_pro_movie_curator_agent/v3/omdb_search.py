@@ -16,7 +16,7 @@ async def search_movie(title: str) -> dict[str, Any] | str:
      async with aiohttp.ClientSession() as session:
          try: 
              async with session.get(
-                 "https://www.omdbapi.com/",
+                 "http://www.omdbapi.com/",
                  params={
                      "apikey": api_key,
                      "t": title,
