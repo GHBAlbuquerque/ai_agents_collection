@@ -4,13 +4,12 @@ from prompts import description, instructions
 from agno.agent import Agent
 from agno.models.openai import OpenAIChat
 from agno.tools.websearch import WebSearchTools
-from omdb_search import search_movie
+from tools.omdb import search_movie
 
 from models import MovieRecommendation
 
 import os
 import dotenv
-
 
 dotenv.load_dotenv(dotenv_path=".env", override=True)
 
