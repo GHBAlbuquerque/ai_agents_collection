@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FilmPro - Movie Recommendations</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #050505;
+            color: white;
+        }
+        .font-bricolage { font-family: 'Bricolage Grotesque', sans-serif !important; }
+        
+        .stars {
+            background-image:
+                radial-gradient(1px 1px at 20px 30px, #fff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 40px 70px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 50px 160px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(1.5px 1.5px at 90px 40px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 130px 80px, #ffffff, rgba(0,0,0,0));
+            background-size: 200px 200px;
+            opacity: 0.2;
+        }
+
+        .electric-card {
+            box-shadow: 0 0 30px rgba(249, 115, 22, 0.2), inset 0 0 20px rgba(249, 115, 22, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .electric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 40px rgba(249, 115, 22, 0.3), inset 0 0 20px rgba(249, 115, 22, 0.1);
+        }
+
+        @keyframes fadeInUpBlur {
+            0% { opacity: 0; transform: translateY(20px); filter: blur(10px); }
+            100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+        .animate-entry { animation: fadeInUpBlur 1s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+    </style>
+</head>
+<body class="min-h-screen relative overflow-x-hidden">
+    <div class="fixed inset-0 z-0 pointer-events-none">
+        <div class="stars absolute inset-0"></div>
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-orange-900/10 blur-[120px] rounded-full"></div>
+    </div>
+
+    <nav class="relative z-50 flex items-center justify-between px-6 py-6 max-w-7xl mx-auto border-b border-white/5 animate-entry">
+        <div class="flex items-center gap-2">
+            <i data-lucide="asterisk" class="text-orange-500 w-8 h-8"></i>
+            <span class="text-xl font-sans font-bold">FilmPro</span>
+        </div>
+    </nav>
+
+    <main class="relative z-10 max-w-6xl mx-auto px-6 pt-20 pb-20 text-center">
+        <h1 class="text-5xl lg:text-7xl font-bricolage font-light tracking-tight mb-6 animate-entry" style="animation-delay: 100ms">
+            FIND YOUR NEXT <br/>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-orange-200 to-orange-400">FAVORITE MOVIE</span>
+        </h1>
+        <p class="text-lg text-neutral-400 mb-10 animate-entry" style="animation-delay: 200ms">
+            Tell us what you're in the mood for, your favorite genres, or movies you loved.
+        </p>
+
+        <div class="relative max-w-2xl mx-auto animate-entry" style="animation-delay: 300ms">
+            <div class="flex flex-col sm:flex-row items-center rounded-2xl bg-neutral-900/50 border border-white/10 p-2 focus-within:border-orange-500/50 transition-all gap-2">
+                <input id="preferencesInput" type="text" class="w-full bg-transparent border-none text-white px-4 py-3 focus:outline-none placeholder:text-neutral-600" placeholder="e.g. A mystery thriller with plot twists...">
+                <button id="searchBtn" class="w-full sm:w-auto bg-gradient-to-t from-orange-600 to-orange-400 hover:brightness-110 text-white px-8 py-3 rounded-xl font-medium transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_-5px_rgba(249,115,22,0.4)]">
+                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                    Recommend
+                </button>
+            </div>
+        </div>
+
+        <div id="resultsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-20 text-left"></div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        const searchBtn = document.getElementById('searchBtn');
+        const preferencesInput = document.getElementById('preferencesInput');
+        const resultsGrid = document.getElementById('resultsGrid');
+
+        searchBtn.addEventListener('click', async () => {
+            const preferences = preferencesInput.value.trim();
+            if (!preferences) return;
+
+            searchBtn.disabled = true;
+            const originalBtnContent = searchBtn.innerHTML;
+            searchBtn.innerHTML = '<span class="animate-spin mr-2">⏳</span> Searching...';
+            resultsGrid.innerHTML = '';
+
+            try {
+                const response = await fetch('/recommendations', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ preferences })
+                });
+
+                if (!response.ok) throw new Error('Failed to fetch recommendations');
+
+                const data = await response.json();
+                const movies = data.movies || data.recommendations || (Array.isArray(data) ? data : []);
+                renderMovies(movies);
+            } catch (error) {
+                console.error(error);
+                resultsGrid.innerHTML = `<p class="text-red-500 col-span-full text-center">Error: \${error.message}</p>`;
+            } finally {
+                searchBtn.disabled = false;
+                searchBtn.innerHTML = originalBtnContent;
+                lucide.createIcons();
+            }
+        });
+
+        function renderMovies(movies) {
+            if (movies.length === 0) {
+                resultsGrid.innerHTML = '<p class="text-neutral-500 col-span-full text-center">No movies found. Try different preferences.</p>';
+                return;
+            }
+
+            resultsGrid.innerHTML = movies.map((movie, index) => `
+                <div class="relative bg-neutral-900 rounded-[24px] p-[1px] electric-card overflow-hidden animate-entry" style="animation-delay: \${index * 100}ms">
+                    <div class="absolute inset-0 bg-gradient-to-b from-orange-500/50 via-transparent to-transparent opacity-20"></div>
+                    <div class="relative z-10 bg-[#0A0A0A] rounded-[23px] h-full p-6 flex flex-col">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-[10px] uppercase text-orange-400 border border-orange-500/20 px-2 py-0.5 rounded bg-orange-500/5 font-mono">\${movie.release_year || 'N/A'}</span>
+                            <span class="text-[10px] text-neutral-400 flex items-center gap-1">
+                                <i data-lucide="star" class="w-3 h-3 text-orange-500 fill-orange-500"></i>
+                                \${movie.imdb_rating || 'N/A'}
+                            </span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">\${movie.title}</h3>
+                        <p class="text-xs text-neutral-500 mb-4">\${movie.director || 'Unknown Director'} • \${movie.duration_minutes || '?'} min</p>
+                        <p class="text-xs text-neutral-400 mb-4 line-clamp-3">\${movie.synopsis || 'No synopsis available.'}</p>
+                        <div class="mt-auto pt-4 border-t border-white/5">
+                            <p class="text-[10px] text-neutral-500 uppercase mb-2">Why you'll like it:</p>
+                            <p class="text-[11px] text-orange-200/80 leading-relaxed italic">"\${movie.recommendation_reason || 'Highly recommended based on your tastes.'}"</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+    </script>
+</body>
+</html>

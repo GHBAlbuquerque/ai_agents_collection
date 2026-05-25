@@ -1,0 +1,330 @@
+{
+  "movies": [
+    {
+      "title": "This Is Spinal Tap",
+      "release_year": 1984,
+      "director": "Rob Reiner",
+      "genres": [
+        "Comedy",
+        "Music"
+      ],
+      "imdb_rating": 7.9,
+      "duration_minutes": 82,
+      "primary_language": "English",
+      "synopsis": "A fictional British heavy metal band tours the US, exposing the absurdities and chaos behind rock stardom.",
+      "age_rating": "R",
+      "content_warnings": null,
+      "cast": [
+        {
+          "name": "Rob Reiner",
+          "character": "Artie Fufkin"
+        },
+        {
+          "name": "Michael McKean",
+          "character": "David St. Hubbins"
+        },
+        {
+          "name": "Christopher Guest",
+          "character": "Nigel Tufnel"
+        }
+      ],
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMTQ2MTIzMzg5Nl5BMl5BanBnXkFtZTgwOTc5NDI1MDE@._V1_SX300.jpg",
+      "streaming_platforms": null,
+      "recommendation_reason": "Directly probes the music industry with a sharp, satirical eye—perfect if you want a Rock Star vibe with humor and behind-the-scenes pandemonium."
+    },
+    {
+      "title": "Almost Famous",
+      "release_year": 2000,
+      "director": "Cameron Crowe",
+      "genres": [
+        "Adventure",
+        "Comedy",
+        "Drama"
+      ],
+      "imdb_rating": 7.9,
+      "duration_minutes": 122,
+      "primary_language": "English",
+      "synopsis": "A teenage aspiring journalist travels with a rock band, experiencing fame, friendships, and the wild tour life.",
+      "age_rating": "R",
+      "content_warnings": null,
+      "cast": [
+        {
+          "name": "Billy Crudup",
+          "character": "Russell Hammond"
+        },
+        {
+          "name": "Patrick Fugit",
+          "character": "William Miller"
+        },
+        {
+          "name": "Kate Hudson",
+          "character": "Penny Lane"
+        }
+      ],
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BZGFmNDQzOTItOGZkNS00NjFkLWE4MjQtNmRjMjNlMjg3YzdiXkEyXkFqcGc@._V1_SX300.jpg",
+      "streaming_platforms": null,
+      "recommendation_reason": "A heartfelt, coming-of-age look at the music world with rich performances and a vivid tour vibe, echoing the allure and cost of fame."
+    },
+    {
+      "title": "Whiplash",
+      "release_year": 2014,
+      "director": "Damien Chazelle",
+      "genres": [
+        "Drama",
+        "Music"
+      ],
+      "imdb_rating": 8.5,
+      "duration_minutes": 106,
+      "primary_language": "English",
+      "synopsis": "A young drummer's fierce dedication clashes with a tyrannical instructor, pushing both toward the edge of madness.",
+      "age_rating": "R",
+      "content_warnings": null,
+      "cast": [
+        {
+          "name": "Miles Teller",
+          "character": "Andrew Neyman"
+        },
+        {
+          "name": "J.K. Simmons",
+          "character": "Terence Fletcher"
+        },
+        {
+          "name": "Melissa Benoist",
+          "character": "Nicole"
+        }
+      ],
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMDFjOWFkYzktYzhhMC00NmYyLTkwY2EtYjViMDhmNzg0OGFkXkEyXkFqcGc@._V1_SX300.jpg",
+      "streaming_platforms": null,
+      "recommendation_reason": "Intense, performance-driven drama about obsession, craft, and the price of greatness in the music world."
+    },
+    {
+      "title": "Sing Street",
+      "release_year": 2016,
+      "director": "John Carney",
+      "genres": [
+        "Comedy",
+        "Drama",
+        "Music"
+      ],
+      "imdb_rating": 7.9,
+      "duration_minutes": 106,
+      "primary_language": "English",
+      "synopsis": "A Dublin teen forms a band to win over a girl and escape family troubles, crafting a soundtrack to his adolescence.",
+      "age_rating": "PG-13",
+      "content_warnings": null,
+      "cast": [
+        {
+          "name": "Ferdia Walsh-Peelo",
+          "character": "Conor"
+        },
+        {
+          "name": "Aidan Gillen",
+          "character": "Brendan (Conor's brother)"
+        },
+        {
+          "name": "Maria Doyle Kennedy",
+          "character": "Mrs. O'Donoghue"
+        }
+      ],
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMjEzODA3MDcxMl5BMl5BanXkFtZTgwODgxNDk3NzE@._V1_SX300.jpg",
+      "streaming_platforms": null,
+      "recommendation_reason": "Energetic, optimistic, music-driven coming-of-age story with catchy songs and an infectious spirit."
+    },
+    {
+      "title": "Inside Llewyn Davis",
+      "release_year": 2013,
+      "director": "Ethan Coen, Joel Coen",
+      "genres": [
+        "Drama",
+        "Music"
+      ],
+      "imdb_rating": 7.4,
+      "duration_minutes": 104,
+      "primary_language": "English",
+      "synopsis": "A week in the life of a struggling folk musician navigating the 1960s New York scene.",
+      "age_rating": "R",
+      "content_warnings": null,
+      "cast": [
+        {
+          "name": "Oscar Isaac",
+          "character": "Llewyn Davis"
+        },
+        {
+          "name": "Carey Mulligan",
+          "character": "Jean"
+        },
+        {
+          "name": "John Goodman",
+          "character": "Roland"
+        }
+      ],
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMjAxNjcyNDQxM15BMl5BanXkFtZTgwNzU2NDA0MDE@._V1_SX300.jpg",
+      "streaming_platforms": null,
+      "recommendation_reason": "A moody, character-driven portrait of a musician's stubborn journey through a challenging era in folk music."
+    },
+    {
+      "title": "La La Land",
+      "release_year": 2016,
+      "director": "Damien Chazelle",
+      "genres": [
+        "Comedy",
+        "Drama",
+        "Music"
+      ],
+      "imdb_rating": 8.0,
+      "duration_minutes": 128,
+      "primary_language": "English",
+      "synopsis": "A jazz pianist and an aspiring actress chase love and stardom in modern-day Los Angeles.",
+      "age_rating": "PG-13",
+      "content_warnings": null,
+      "cast": [
+        {
+          "name": "Ryan Gosling",
+          "character": "Sebastian"
+        },
+        {
+          "name": "Emma Stone",
+          "character": "Mia"
+        },
+        {
+          "name": "Rosemarie DeWitt",
+          "character": "Laura"
+        }
+      ],
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BMzUzNDM2NzM2MV5BMl5BanXkFtZTgwNTM3NTg4OTE@._V1_QL75_UX380_CR0,0,380,562_.jpg",
+      "streaming_platforms": null,
+      "recommendation_reason": "A modern musical with dazzling numbers and a poignant love story, capturing the dream-and-struggle ethos of the music world."
+    },
+    {
+      "title": "School of Rock",
+      "release_year": 2003,
+      "director": "Richard Linklater",
+      "genres": [
+        "Comedy",
+        "Music"
+      ],
+      "imdb_rating": 7.2,
+      "duration_minutes": 109,
+      "primary_language": "English",
+      "synopsis": "A substitute teacher forms a rock band with his students to win a Battle of the Bands.",
+      "age_rating": "PG-13",
+      "content_warnings": null,
+      "cast": [
+        {
+          "name": "Jack Black",
+          "character": "Dewey Finn"
+        },
+        {
+          "name": "Mike White",
+          "character": "Neville (David)"
+        },
+        {
+          "name": "Joan Cusack",
+          "character": "Rosalie Mullins"
+        }
+      ],
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BOTg2NDU4Mjg2NV5BMl5BanXkFtZTgwNjQ0MDIyMDI@._V1_SX300.jpg",
+      "streaming_platforms": null,
+      "recommendation_reason": "High-energy comedy about kids forming a band, blending humor with genuine musical passion and a rock-ready vibe."
+    },
+    {
+      "title": "Velvet Goldmine",
+      "release_year": 1998,
+      "director": "Todd Haynes",
+      "genres": [
+        "Drama",
+        "Music"
+      ],
+      "imdb_rating": 6.9,
+      "duration_minutes": 123,
+      "primary_language": "English",
+      "synopsis": "A journalist investigates a glam rock icon's disappearance, unveiling a kaleidoscopic saga of fame and identity.",
+      "age_rating": "R",
+      "content_warnings": null,
+      "cast": [
+        {
+          "name": "Ewan McGregor",
+          "character": "Brian Slade"
+        },
+        {
+          "name": "Jonathan Rhys Meyers",
+          "character": "Curt Wild"
+        },
+        {
+          "name": "Christian Bale",
+          "character": "Arthur Stuart"
+        }
+      ],
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BZWFmZjhlNWQtMjEzMi00MjVhLWIyYTQtNGJhZTA4MzA1ZDM1XkEyXkFqcGc@._V1_SX300.jpg",
+      "streaming_platforms": null,
+      "recommendation_reason": "Glam-rock mythology with stylistic bravado and a sharper look at the music industry’s constructed legends."
+    },
+    {
+      "title": "The Commitments",
+      "release_year": 1991,
+      "director": "Alan Parker",
+      "genres": [
+        "Comedy",
+        "Drama",
+        "Music"
+      ],
+      "imdb_rating": 7.6,
+      "duration_minutes": 118,
+      "primary_language": "English",
+      "synopsis": "A Dublin soul band fights to break through in the music business.",
+      "age_rating": "R",
+      "content_warnings": null,
+      "cast": [
+        {
+          "name": "Robert Arkins",
+          "character": "Jimmy Rabbitte"
+        },
+        {
+          "name": "Michael Aherne",
+          "character": "Deco"
+        },
+        {
+          "name": "Angeline Ball",
+          "character": "Imelda"
+        }
+      ],
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BM2Y0NGI0NDctYTEwOS00OTliLThhNDktZGMyMDg4ZTI0NWI0XkEyXkFqcGc@._V1_SX300.jpg",
+      "streaming_platforms": null,
+      "recommendation_reason": "Gritty, soulful, character-driven look at a band hustling from Dublin’s street clubs to the stage."
+    },
+    {
+      "title": "24 Hour Party People",
+      "release_year": 2002,
+      "director": "Michael Winterbottom",
+      "genres": [
+        "Biography",
+        "Comedy",
+        "Drama"
+      ],
+      "imdb_rating": 7.3,
+      "duration_minutes": 117,
+      "primary_language": "English",
+      "synopsis": "Manchester 1976–1992: the rise of Factory Records, Joy Division/New Order, and the Hacienda.",
+      "age_rating": "R",
+      "content_warnings": null,
+      "cast": [
+        {
+          "name": "Steve Coogan",
+          "character": "Tony Wilson"
+        },
+        {
+          "name": "Lennie James",
+          "character": null
+        },
+        {
+          "name": "John Thomson",
+          "character": null
+        }
+      ],
+      "poster_url": "https://m.media-amazon.com/images/M/MV5BYWFiMmE2YmMtMzY0ZC00Y2JlLThlZTktMmNkYTA1NTY2OWNhXkEyXkFqcGc@._V1_SX300.jpg",
+      "streaming_platforms": null,
+      "recommendation_reason": "A witty, sweeping chronicle of a musical movement—the perfect look behind the scenes of a music empire."
+    }
+  ],
+  "total_recommendations": 10
+}

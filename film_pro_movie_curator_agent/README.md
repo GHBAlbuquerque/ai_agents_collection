@@ -18,7 +18,7 @@ An AI-powered movie curation and recommendation system. FilmPro utilizes an auto
 
 1. **Environment Setup:** Make sure you have your `.env` file configured in the project directory with your API keys (e.g., `OPENAI_API_KEY`, OMDb keys).
 2. **Start the Server:**
-   Navigate to the version folder and run:
+   Navigate to the version folder (v1,v2,v3, v4 or v5) and run:
    ```bash
    dotenv run python main.py
    ```
@@ -27,8 +27,8 @@ An AI-powered movie curation and recommendation system. FilmPro utilizes an auto
    python main.py
    ```
 
-## 💡 How to Use
-Once the server is running, you can interact with the system:
+## 💡 How to Use (Version 4)
+Once the server is running, you can interact with the system through an API:
 
 * Get Recommendations:
 Send a POST request to:
@@ -36,7 +36,7 @@ Send a POST request to:
     ```
     HTTP
     POST [http://0.0.0.0:8000/recommendations](http://0.0.0.0:8000/recommendations)
-    ````
+    ```
     
     _(Passes user preferences to the agent and returns a Pydantic-validated JSON response)._
 
@@ -44,6 +44,17 @@ Send a POST request to:
 
     View the auto-generated Swagger UI docs at:
     http://0.0.0.0:8000/docs
+ 
+
+## 🖥️ How to use (Version 5)
+Version 5 allows interaction through an user interface.
+After starting the server:
+
+3. Open v5/site/index.html on a broser
+4. Type your movie recommendation desire
+5. Read the recommendations on the cards
+
+![UI](misc/ui.png)
 
 ---
 *Project by [@AsimovAcademy](https://github.com/asimov-academy)*
