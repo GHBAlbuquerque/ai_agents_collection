@@ -1,7 +1,7 @@
 from typing import Any
 
 import aiohttp
-from config import Config
+from agent.config import Config
 
 import dotenv
 dotenv.load_dotenv(dotenv_path=".env", override=True)

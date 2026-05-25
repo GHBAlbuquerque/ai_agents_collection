@@ -1,7 +1,6 @@
 from pydantic import BaseModel, Field
 from typing import Optional, List
 
-
 class Cast(BaseModel):
     """Information about a cast member"""
     name: str = Field(..., description="Actor/Actress name")

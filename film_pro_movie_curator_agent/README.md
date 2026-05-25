@@ -7,10 +7,24 @@
 
 ![Flow diagram](misc/flow-diagram.png)
 
-cd to version folder
-> dotenv run python main.py
+HOW TO RUN:
+cd to version folder:
+```
+dotenv run python main.py
+```
 OR
-> python main.py
+```
+python main.py
+```
+
+
+HOW TO USE:
+To get recommendations:
+- POST http://0.0.0.0:8000/recommendations
+
+To access project docs:
+- http://0.0.0.0:8000/docs
+
 
 ---
 *Project by [@AsimovAcademy](https://github.com/asimov-academy)*

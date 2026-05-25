@@ -1,13 +1,11 @@
-import asyncio
-
 from agno.agent import Agent
 from agno.models.openai import OpenAIChat
 from agno.tools.websearch import WebSearchTools
 
-from config import Config
-from models import MovieRecommendation
-from prompts import description, instructions
-from tools.omdb import search_movie
+from agent.config import Config
+from agent.models import MovieRecommendation
+from agent.prompts import description, instructions
+from agent.tools.omdb import search_movie
 
 import dotenv
 
@@ -26,18 +24,23 @@ movie_recommendation_agent = Agent(
     debug_level=1
 )
 
-async def recommendations():
+async def get_recommendations(input: str) -> MovieRecommendation:
     result = await movie_recommendation_agent.arun(
-        "I'm looking for fictional movies set in the music world, similar in tone or subject to Rock Star (2001).",
+        input,
         stream=False
     )
     
-    if result and result.content:
-        data: MovieRecommendation = result.content
-        pretty_json_output = data.model_dump_json(
-            indent=2,
-        )
-        
-        print(pretty_json_output)
-        
-        return result
+    if not result or not result.content:
+        raise Exception("Error trying to obtain recommendations.")
+    
+    
+    data: MovieRecommendation = result.content
+    pretty_json_output = data.model_dump_json(
+        indent=2,
+    )
+    
+    print(pretty_json_output)
+    
+    return data
+    
+    
