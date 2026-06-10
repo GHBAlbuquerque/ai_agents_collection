@@ -9,6 +9,7 @@ As this collection grows, each project is isolated in its own directory with its
 
 1. [news_curator_agent](https://github.com/GHBAlbuquerque/ai_agents_collection/tree/main/news_curator_agent): An autonomous agent system capable of performing complete news curation based on a given news title or topic.
 2. [media_content_generator_agent](https://github.com/GHBAlbuquerque/ai_agents_collection/tree/main/media_content_generator_agent): An AI-powered research and content ideation engine that automates video audio extraction, transcribes clips via Groq Whisper, and leverages an Agno Agent to brainstorm tailored content scripts.
+3. [film_pro_movie_curator_agent](https://github.com/GHBAlbuquerque/ai_agents_collection/tree/main/film_pro_movie_curator_agent): An AI-powered movie curation and recommendation system that utilizes an autonomous agent built with Agno to analyze user preferences, search the web via DuckDuckGo, and fetch accurate movie data from the OMDb API to deliver highly personalized movie recommendations.
 
 *(More projects will be added here as the collection expands!)*
 
