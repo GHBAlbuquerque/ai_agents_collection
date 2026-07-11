@@ -1,11 +1,17 @@
-import streamlit as st
 from pathlib import Path
-import time 
+from langchain_core.chat_history import InMemoryChatMessageHistory
+import streamlit as st
+import time
 
 FILES_FOLDER = Path(__file__).parent / 'files'
 
-def chat_bot_chain():
+def create_chatbot_chain():
     st.session_state['chain'] = True
+    
+    memory = InMemoryChatMessageHistory()
+    memory.add_user_message('Hello World!')
+    memory.add_ai_message("Hello! I'm an LLM")
+    st.session_state['memory'] = memory
     time.sleep(1)
     pass
 
@@ -26,19 +32,54 @@ def sidebar():
     if 'chain' in st.session_state:
         label_button = 'Refresh ChatBot'
     
-    if st.button(label_button, use_container_width=True):
+    if st.button(label_button, use_container_width=True, type='primary'):
         if len(list(FILES_FOLDER.glob('*pdf'))) == 0: #if we have pdfs uploaded, we have to ask for files
             st.error('Add files .pdf to start chatting')
         else:
             st.success('Starting chat...')
-            chat_bot_chain()
+            create_chatbot_chain()
             st.rerun()
 
+def chat_window():
+    st.markdown(
+    "<h2 style='text-align: center;'>🤖 Welcome to Chat PDF</h2>",
+    unsafe_allow_html=True
+    )
+    
+    if not 'chain' in st.session_state:
+        st.error('Add files .pdf to start chatting')
+        st.stop()
+    
+    memory = st.session_state['memory']
+    history = memory.messages
+    # history = {
+    #     index: message.content
+    #     for index, message in enumerate(memory.messages)
+    # }
+    # st.write(history)
+    
+    container = st.container()
+    for message in history:
+        chat = container.chat_message(message.type)
+        chat.markdown(message.content)
+        
+    input = st.chat_input("Ask me anything!")
+    if input:
+        memory.add_user_message(input)
+        
+        chat = container.chat_message('human')
+        chat.markdown(input)
+        
+        chat = container.chat_message('ai')
+        chat.markdown("Generating answer...")
+        time.sleep(2)
+    
 
 def main():
     with st.sidebar:
         sidebar()
-    pass
+    
+    chat_window()
         
 
 if __name__ == "__main__":
