@@ -39,6 +39,22 @@ def sidebar():
             st.session_state['memory'] = memory
 
             st.rerun()
+            
+def app_answer(question: str) -> str | None:
+    normalized = question.lower().strip()
+
+    if normalized in {"what can you do?", "what can you answer?"}:
+        return "I can answer questions about the PDFs you uploaded."
+
+    if normalized in {
+        "what documents do you have?",
+        "what do you have uploaded?",
+        "which files do i have?",
+    }:
+        files = [file.name for file in FILES_FOLDER.glob("*.pdf")]
+        return "You uploaded:\n" + "\n".join(f"- {file}" for file in files)
+
+    return None
 
 def chat_window():
     st.markdown(
@@ -69,7 +85,11 @@ def chat_window():
         chat = container.chat_message('ai')
         chat.markdown("Generating answer...")
 
-        answer = chain.invoke(input=input)
+        answer = app_answer(input)
+
+        if answer is None:
+            answer = chain.invoke(input)
+        
         memory.add_ai_message(answer)
         st.rerun()
     

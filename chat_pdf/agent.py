@@ -5,7 +5,7 @@ from langchain_core.runnables import RunnablePassthrough
 from langchain_core.runnables import RunnableParallel
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.vectorstores import VectorStoreRetriever
-from ingestion import create_retriever
+from prompts import SYSTEM_PROMPT, HUMAN_PROMPT
 
 from dotenv import load_dotenv
 load_dotenv() 
@@ -25,12 +25,8 @@ def format_docs_output(docs):
 
 def config_chat_chain(retriever : VectorStoreRetriever, memory: InMemoryChatMessageHistory):
     prompt = ChatPromptTemplate.from_messages([
-        ("system",  
-         "Answer only using the retrieved context. "
-        "If the answer is missing, say you don't know.\n\n"
-        "Context:\n{context}"),
-        ("human", 
-         "History: {history}\nQuestion: {question}")
+        ("system", SYSTEM_PROMPT),
+        ("human", HUMAN_PROMPT)
     ])
     inputs = {"context": retriever | format_docs_output, "question": RunnablePassthrough(), "history": lambda _: memory.messages}
     # context should come from the retriever
