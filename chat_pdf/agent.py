@@ -16,7 +16,7 @@ load_dotenv()
 
 FILES_FOLDER = Path(__file__).parent / 'files'
 SPLITTER = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200, length_function=len)
-MODEL = ChatOpenAI(model="openai:gpt-5.4-mini")
+MODEL = ChatOpenAI(model="gpt-5.4-mini")
 PARSER = StrOutputParser()
 
 # -------------------- // --------------------
@@ -63,14 +63,21 @@ def build_vector_store(documents : list):
 # -------------------- // --------------------
 # 4. Create Chat Chain
 
+def format_docs_output(docs):
+    return "\n\n".join(doc.page_content for doc in docs)
+
 def create_chat_chain(vector_store : FAISS, question: str):
     memory = InMemoryChatMessageHistory()
-    retriever = vector_store.as_retriever()
+    retriever = vector_store.as_retriever(search_kwargs={"k": 2})
     prompt = ChatPromptTemplate.from_messages([
-        ("system", "Answer using the retrieved context"),
-        ("human", "History: {history}\nQuestion: {question}")
+        ("system",  
+         "Answer only using the retrieved context. "
+        "If the answer is missing, say you don't know.\n\n"
+        "Context:\n{context}"),
+        ("human", 
+         "History: {history}\nQuestion: {question}")
     ])
-    inputs = {"context": retriever, "question": RunnablePassthrough(), "history": lambda _: memory.messages}
+    inputs = {"context": retriever | format_docs_output, "question": RunnablePassthrough(), "history": lambda _: memory.messages}
     # context should come from the retriever
     # RunnablePassthrough -> pass what was used on `invoke` through unchanged
     # question should be whatever text is passed into the chain
@@ -82,13 +89,17 @@ def create_chat_chain(vector_store : FAISS, question: str):
         prompt |
         MODEL |
         PARSER
-        ) 
+        )
     
     return chat_chain
     
 if __name__ == '__main__':
     documents = document_loading()
     split_documents = split_docs(documents)
-    vector_store = build_vector_store(documents)
-    chain = create_chat_chain(vector_store=vector_store, question="What is the Lunar Base?")
-    print(chain.model_dump_json)
+    vector_store = build_vector_store(split_documents)
+    question= "What is the Lunar Base?"
+    chain = create_chat_chain(vector_store=vector_store, question=question)
+    #print(chain.model_dump_json)
+    
+    response = chain.invoke(question)
+    print(f"\n\n{response}\n\n")
