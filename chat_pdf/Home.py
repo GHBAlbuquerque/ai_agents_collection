@@ -2,7 +2,8 @@ from pathlib import Path
 from langchain_core.chat_history import InMemoryChatMessageHistory
 import streamlit as st
 import time
-from agent import FILES_FOLDER, create_chain_and_memory
+from ingestion import FILES_FOLDER, create_retriever
+from agent import create_chain_and_memory
 
 """
 Owns StreamLit components and Session State.
@@ -31,7 +32,8 @@ def sidebar():
             st.error('Add files .pdf to start chatting')
         else:
             st.success('Starting chat...')
-            chain, memory = create_chain_and_memory()
+            retriever = create_retriever()
+            chain, memory = create_chain_and_memory(retriever)
 
             st.session_state['chain'] = chain
             st.session_state['memory'] = memory
