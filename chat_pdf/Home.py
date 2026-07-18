@@ -2,18 +2,12 @@ from pathlib import Path
 from langchain_core.chat_history import InMemoryChatMessageHistory
 import streamlit as st
 import time
+from agent import FILES_FOLDER, create_chain_and_memory
 
-FILES_FOLDER = Path(__file__).parent / 'files'
-
-def create_chatbot_chain():
-    st.session_state['chain'] = True
-    
-    memory = InMemoryChatMessageHistory()
-    memory.add_user_message('Hello World!')
-    memory.add_ai_message("Hello! I'm an LLM")
-    st.session_state['memory'] = memory
-    time.sleep(1)
-    pass
+"""
+Owns StreamLit components and Session State.
+Uses Chain and Memory from agent.
+"""
 
 def sidebar():
     uploaded_pdfs = st.file_uploader("Add your PDF files:", type=['.pdf'], accept_multiple_files=True)
@@ -37,7 +31,11 @@ def sidebar():
             st.error('Add files .pdf to start chatting')
         else:
             st.success('Starting chat...')
-            create_chatbot_chain()
+            chain, memory = create_chain_and_memory()
+
+            st.session_state['chain'] = chain
+            st.session_state['memory'] = memory
+
             st.rerun()
 
 def chat_window():
@@ -49,14 +47,10 @@ def chat_window():
     if not 'chain' in st.session_state:
         st.error('Add files .pdf to start chatting')
         st.stop()
-    
+     
+    chain = st.session_state['chain']
     memory = st.session_state['memory']
     history = memory.messages
-    # history = {
-    #     index: message.content
-    #     for index, message in enumerate(memory.messages)
-    # }
-    # st.write(history)
     
     container = st.container()
     for message in history:
@@ -72,7 +66,10 @@ def chat_window():
         
         chat = container.chat_message('ai')
         chat.markdown("Generating answer...")
-        time.sleep(2)
+
+        answer = chain.invoke(input=input)
+        memory.add_ai_message(answer)
+        st.rerun()
     
 
 def main():

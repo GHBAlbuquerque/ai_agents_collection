@@ -14,6 +14,10 @@ from langchain_core.output_parsers import StrOutputParser
 from dotenv import load_dotenv
 load_dotenv() 
 
+"""
+Creates and returns both chain and its memory.
+"""
+
 FILES_FOLDER = Path(__file__).parent / 'files'
 SPLITTER = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200, length_function=len)
 MODEL = ChatOpenAI(model="gpt-5.4-mini")
@@ -61,12 +65,12 @@ def build_vector_store(documents : list):
    return vector_store
 
 # -------------------- // --------------------
-# 4. Create Chat Chain
+# 4. Config Chat Chain and Memory
 
 def format_docs_output(docs):
     return "\n\n".join(doc.page_content for doc in docs)
 
-def create_chat_chain(vector_store : FAISS, question: str):
+def config_chat_chain(vector_store : FAISS):
     memory = InMemoryChatMessageHistory()
     retriever = vector_store.as_retriever(search_kwargs={"k": 2})
     prompt = ChatPromptTemplate.from_messages([
@@ -75,7 +79,7 @@ def create_chat_chain(vector_store : FAISS, question: str):
         "If the answer is missing, say you don't know.\n\n"
         "Context:\n{context}"),
         ("human", 
-         "History: {history}\nQuestion: {question}")
+         "History: {history}\n")
     ])
     inputs = {"context": retriever | format_docs_output, "question": RunnablePassthrough(), "history": lambda _: memory.messages}
     # context should come from the retriever
@@ -91,15 +95,17 @@ def create_chat_chain(vector_store : FAISS, question: str):
         PARSER
         )
     
-    return chat_chain
-    
-if __name__ == '__main__':
+    return chat_chain, memory
+
+# -------------------- // --------------------
+# 5. Create Chat Chain
+ 
+def create_chain_and_memory():
     documents = document_loading()
     split_documents = split_docs(documents)
     vector_store = build_vector_store(split_documents)
     question= "What is the Lunar Base?"
-    chain = create_chat_chain(vector_store=vector_store, question=question)
-    #print(chain.model_dump_json)
     
-    response = chain.invoke(question)
-    print(f"\n\n{response}\n\n")
+    return config_chat_chain(vector_store=vector_store)
+
+    
