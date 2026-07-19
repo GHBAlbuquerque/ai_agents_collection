@@ -1,12 +1,10 @@
-from pathlib import Path
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_openai.embeddings import OpenAIEmbeddings
-from langchain_openai.chat_models import ChatOpenAI
 from langchain_community.vectorstores import FAISS
 from langchain_core.vectorstores import VectorStoreRetriever
-from langchain_core.output_parsers import StrOutputParser
 from langchain_core.documents import Document
+from configs import FILES_FOLDER, RETRIEVAL_ARGS, RETRIEVAL_SEARCH_TYPE
 
 from dotenv import load_dotenv
 load_dotenv() 
@@ -15,10 +13,7 @@ load_dotenv()
 Does document ingestion, chunkerization, creates Vector Database and retriever.
 """
 
-FILES_FOLDER = Path(__file__).parent / 'files'
 SPLITTER = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200, length_function=len)
-MODEL = ChatOpenAI(model="gpt-5.4-mini")
-PARSER = StrOutputParser()
 
 # -------------------- // --------------------
 # 1. Load pdfs
@@ -70,5 +65,8 @@ def create_retriever() -> VectorStoreRetriever:
     chunks = split_docs(documents)
     vector_store = build_vector_store(chunks)
     
-    return vector_store.as_retriever(search_kwargs={"k":2})
+    return vector_store.as_retriever(
+        search_kwargs=RETRIEVAL_ARGS, 
+        search_type=RETRIEVAL_SEARCH_TYPE
+        )
     

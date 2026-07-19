@@ -1,8 +1,8 @@
 from pathlib import Path
 from langchain_core.chat_history import InMemoryChatMessageHistory
 import streamlit as st
-import time
-from ingestion import FILES_FOLDER, create_retriever
+from configs import FILES_FOLDER
+from ingestion import create_retriever
 from agent import create_chain_and_memory
 
 """
