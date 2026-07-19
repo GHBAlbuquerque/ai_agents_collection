@@ -1,5 +1,4 @@
-from pathlib import Path
-from langchain_core.chat_history import InMemoryChatMessageHistory
+import atexit
 import streamlit as st
 from configs import FILES_FOLDER
 from ingestion import create_retriever
@@ -9,7 +8,24 @@ from agent import create_chain_and_memory
 # Calls ingestion for document upload and Retriever creation.
 # Uses Chain and Memory from agent on chat.
 
-def sidebar():
+# ------------------------------
+# PDF management
+
+def cleanup_pdfs():
+    """
+    Deletes all currently loaded PDFs in the FILES_FOLDER on server shutdown.
+    """
+    print("Shutting down: Cleaning up PDF files...")
+    
+    for file in FILES_FOLDER.glob('*.pdf'):
+        try:
+            file.unlink(missing_ok=True)
+        except Exception as e:
+            print(f"Error deleting {file.name}: {e}")
+            
+atexit.register(cleanup_pdfs)
+    
+def upload_pdfs():
     uploaded_pdfs = st.file_uploader("Add your PDF files:", type=['.pdf'], accept_multiple_files=True)
     
     saved_files = list(FILES_FOLDER.glob("*.pdf"))
@@ -23,12 +39,18 @@ def sidebar():
         return
     
     for file in FILES_FOLDER.glob('*.pdf'):
-        file.unlink() # deletes all previously saved files
+        file.unlink(missing_ok=True) # deletes all previously saved files
         
     for pdf in uploaded_pdfs:
         with open(FILES_FOLDER / pdf.name, 'wb') as f: #open file to save and web = write bytes
             f.write(pdf.read())
 
+# ------------------------------
+# UI with streamlit
+
+def sidebar():   
+    upload_pdfs() 
+    
     label_button = 'Start ChatBot'
     if 'chain' in st.session_state:
         label_button = 'Refresh ChatBot'
@@ -99,7 +121,6 @@ def chat_window():
         
         memory.add_ai_message(answer)
         st.rerun()
-    
 
 def main():
     with st.sidebar:
