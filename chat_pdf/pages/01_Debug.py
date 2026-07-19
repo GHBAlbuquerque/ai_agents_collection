@@ -12,11 +12,14 @@ def debug_page():
     
     memory = st.session_state.get('memory', None)
     history = memory.messages if memory else []
-    retriever = create_retriever()
     mock_question = "Placeholder question for debugging"
-    retrieved_docs = retriever.invoke(mock_question) # invoke retriever to get actual chunks
 
-    actual_context_string = format_docs_output(retrieved_docs)
+    try:
+        retriever = create_retriever()
+        retrieved_docs = retriever.invoke(mock_question) # invoke retriever to get actual chunks
+        actual_context_string = format_docs_output(retrieved_docs)
+    except Exception as e:
+        actual_context_string = "[No context available - no uploaded files yet]"
     
     prompt_template = ChatPromptTemplate.from_messages([
         ("system", SYSTEM_PROMPT),
