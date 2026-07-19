@@ -4,7 +4,7 @@ from langchain_openai.embeddings import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_core.vectorstores import VectorStoreRetriever
 from langchain_core.documents import Document
-from configs import FILES_FOLDER, RETRIEVAL_ARGS, RETRIEVAL_SEARCH_TYPE
+from configs import FILES_FOLDER, get_config
 
 from dotenv import load_dotenv
 load_dotenv() 
@@ -64,7 +64,7 @@ def create_retriever() -> VectorStoreRetriever:
     vector_store = build_vector_store(chunks)
     
     return vector_store.as_retriever(
-        search_kwargs=RETRIEVAL_ARGS, 
-        search_type=RETRIEVAL_SEARCH_TYPE
+        search_kwargs=get_config('retrieval_args'), 
+        search_type=get_config('retrieval_search_type')
         )
     

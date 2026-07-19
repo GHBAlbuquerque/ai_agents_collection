@@ -8,7 +8,7 @@ RETRIEVAL_SEARCH_TYPE = 'mmr'
 RETRIEVAL_ARGS = {"k":2, "fetch_k": 10}
 PROMPT = SYSTEM_PROMPT
 
-def get_config(config_name: str):
+def get_config(config_name: str) -> str:
     config_name_lc = config_name.lower()
     config_getters = {
         'model_name': get_model_name,
@@ -19,6 +19,7 @@ def get_config(config_name: str):
     config_getter = config_getters.get(config_name_lc) # get function
     if config_getter:
         return config_getter(config_name_lc) # execute function
+    return ""
 
 def get_model_name(model_name: str):
     if model_name in st.session_state:

@@ -12,7 +12,14 @@ from agent import create_chain_and_memory
 def sidebar():
     uploaded_pdfs = st.file_uploader("Add your PDF files:", type=['.pdf'], accept_multiple_files=True)
     
-    if uploaded_pdfs is None:
+    saved_files = list(FILES_FOLDER.glob("*.pdf"))
+    
+    if saved_files:
+        st.caption("Current uploaded PDFs:")
+        for file in saved_files:
+            st.write(f"• {file.name}")
+    
+    if not uploaded_pdfs:
         return
     
     for file in FILES_FOLDER.glob('*.pdf'):
@@ -38,6 +45,7 @@ def sidebar():
             st.session_state['memory'] = memory
 
             st.rerun()
+
             
 def app_answer(question: str) -> str | None:
     normalized = question.lower().strip()

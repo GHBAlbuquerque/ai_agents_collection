@@ -5,7 +5,7 @@ from langchain_core.runnables import RunnablePassthrough
 from langchain_core.runnables import RunnableParallel
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.vectorstores import VectorStoreRetriever
-from configs import MODEL_NAME
+from configs import get_config
 from prompts import SYSTEM_PROMPT, HUMAN_PROMPT
 
 from dotenv import load_dotenv
@@ -13,7 +13,7 @@ load_dotenv()
 
 # Creates and returns both chain and its memory using the Vector DB retriever for context.
 
-MODEL = ChatOpenAI(model=MODEL_NAME)
+MODEL = ChatOpenAI(model=get_config('model_name'))
 PARSER = StrOutputParser() 
 
 # -------------------- // --------------------
