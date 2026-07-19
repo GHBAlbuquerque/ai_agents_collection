@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 load_dotenv() 
 
 """
-Creates and returns both chain and its memory.
+Creates and returns both chain and its memory using the Vector DB retriever for context.
 """
 
 MODEL = ChatOpenAI(model="gpt-5.4-mini")

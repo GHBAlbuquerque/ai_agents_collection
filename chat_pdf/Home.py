@@ -7,7 +7,8 @@ from agent import create_chain_and_memory
 
 """
 Owns StreamLit components and Session State.
-Uses Chain and Memory from agent.
+Calls ingestion for document upload and Retriever creation.
+Uses Chain and Memory from agent on chat.
 """
 
 def sidebar():

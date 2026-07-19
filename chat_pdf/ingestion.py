@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 load_dotenv() 
 
 """
-Does document ingestion and creates Vector Database.
+Does document ingestion, chunkerization, creates Vector Database and retriever.
 """
 
 FILES_FOLDER = Path(__file__).parent / 'files'
