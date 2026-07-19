@@ -5,11 +5,9 @@ from configs import FILES_FOLDER
 from ingestion import create_retriever
 from agent import create_chain_and_memory
 
-"""
-Owns StreamLit components and Session State.
-Calls ingestion for document upload and Retriever creation.
-Uses Chain and Memory from agent on chat.
-"""
+# Owns StreamLit components and Session State.
+# Calls ingestion for document upload and Retriever creation.
+# Uses Chain and Memory from agent on chat.
 
 def sidebar():
     uploaded_pdfs = st.file_uploader("Add your PDF files:", type=['.pdf'], accept_multiple_files=True)

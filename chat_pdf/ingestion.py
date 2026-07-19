@@ -9,9 +9,7 @@ from configs import FILES_FOLDER, RETRIEVAL_ARGS, RETRIEVAL_SEARCH_TYPE
 from dotenv import load_dotenv
 load_dotenv() 
 
-"""
-Does document ingestion, chunkerization, creates Vector Database and retriever.
-"""
+# Does document ingestion, chunkerization, creates Vector Database and retriever.
 
 SPLITTER = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200, length_function=len)
 
