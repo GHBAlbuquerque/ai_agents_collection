@@ -4,6 +4,16 @@ from prompts import SYSTEM_PROMPT
 
 FILES_FOLDER = Path(__file__).parent / 'files'
 MODEL_NAME = "gpt-5.4-mini"
+MODEL_OPTIONS = (
+    "gpt-5.4-mini",
+    "gpt-5-mini",
+    "gpt-4.1-mini",
+)
+SEARCH_TYPES= (
+    'mmr',
+    'similarity',
+    'similarity_score_threshold'
+)
 RETRIEVAL_SEARCH_TYPE = 'mmr'
 RETRIEVAL_ARGS = {"k":2, "fetch_k": 10}
 PROMPT = SYSTEM_PROMPT
@@ -40,4 +50,3 @@ def get_system_prompt(prompt: str):
     if prompt in st.session_state:
         return st.session_state[prompt]
     return PROMPT
-
