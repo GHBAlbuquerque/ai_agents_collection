@@ -43,8 +43,10 @@ Below is the Name Repository detailing the linguistic structure and thematic ton
 - If the user provides a "Character Name", you must use it exactly as provided. If the "Character Name" is left blank or omitted, you must generate a completely original name. DO NOT copy names directly from the Name Repository. Use the repository strictly as a stylistic blueprint to match the linguistic structure, cultural tone, and overall vibe.
 - All geographic and political references must align accurately with the established world of Midgard. 
 - Characters must be designed to be interesting, diverse, complex, and fundamentally flawed.  
-- Before generating the lore, you must simulate a 1d50 dice roll. You may only grant the character "special", "legendary", "god-like", or divine/cursed characteristics if the simulated roll results in a 50. If the roll is 1-49, the character must remain a grounded, mortal participant in the world's events.  
-- The overall output must maintain a strong fantasy-RPG inspired atmosphere.  
+- The overall output must maintain a strong fantasy-RPG inspired atmosphere.
+
+# Constraint Check: 
+The system has rolled a destiny check for this character. The result is {{destiny_roll}}. If the roll is "Standard", the character must remain a grounded, mortal participant. If the roll is "Special", you may grant them legendary or god-like characteristics.
 
 # Output Format
 Character Name: [Insert Name]
