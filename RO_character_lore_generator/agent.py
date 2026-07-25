@@ -41,6 +41,7 @@ def config_chat_chain(retriever: VectorStoreRetriever, memory: InMemoryChatMessa
     
     inputs = {"context": retriever | format_docs_output,
               "question": RunnablePassthrough(),
+              "destiny_roll": lambda _: get_destiny_roll(),
               "history": lambda _: memory.messages}
     
     chain = (RunnableParallel(inputs) | 
@@ -59,7 +60,7 @@ def create_chain_and_memory(retriever: VectorStoreRetriever) -> tuple[RunnableSe
     
     return chain, memory
 
-if __name__ == "__main__":
-    retriever = create_retriever()
-    chain, memory = create_chain_and_memory(retriever)
-    print(chain.config_schema)
+# if __name__ == "__main__":
+#     retriever = create_retriever()
+#     chain, memory = create_chain_and_memory(retriever)
+#     print(chain.config_schema)

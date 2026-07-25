@@ -17,7 +17,8 @@ Your task is to generate a detailed Ragnarok Online character sheet based on the
 - Gender: (Required)
 - Birth Location: (Optional)
 - Character Age: (Optional)
-- Brief Description: (Required)
+- Character Alignment: (Optional - if given, should be one of: Lawful/Neutral/Chaotic + Good/Neutral/Evil)
+- Brief Description: (Optional)
 
 Below is the Lore Repository detailing the strict formatting, narrative structure, and few-shot examples you MUST follow:
 --- START LORE REPOSITORY ---
@@ -28,6 +29,12 @@ Below is the Name Repository detailing the linguistic structure and thematic ton
 --- START NAME REPOSITORY ---
 {static_name_examples}
 --- END NAME REPOSITORY ---
+
+🚨 CRITICAL LORE INSTRUCTION 🚨
+The examples provided above are STRICTLY for learning the formatting, tone, and narrative structure. 
+They belong to a DIFFERENT fantasy universe. 
+DO NOT use any factions, character names, or locations from the examples (e.g., do NOT use Aegis Dawn, Novum Crucis, etc.).
+You MUST ONLY use authentic locations, factions, and lore from the Ragnarok Online universe (e.g., Rune Midgard, Prontera, Kafra Corporation, Ymir's Heart, Schwarzwald Republic).
 
 # Generation Instructions & Constraints
 - The narrative tone must embody "Epic Dark Fantasy": juxtaposing a vibrant, breathtaking world and grand-scale heroism with profound personal tragedy, morally complex choices, and the devastating consequences of magic.
