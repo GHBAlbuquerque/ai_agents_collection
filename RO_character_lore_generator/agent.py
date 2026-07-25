@@ -7,8 +7,8 @@ from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.chat_history import InMemoryChatMessageHistory
 from langchain_core.documents import Document
 from narwhals import Unknown
-from configs import MODEL_NAME
-from prompt import SYSTEM_PROMPT
+from properties import MODEL_NAME
+from prompt import SYSTEM_PROMPT, build_human_prompt
 
 from ingestion import create_retriever
 
@@ -32,17 +32,15 @@ def format_docs_output(documents: list[Document]):
 MODEL = ChatOpenAI(model=MODEL_NAME)
 PARSER = StrOutputParser()
 
-def config_chat_chain(retriever: VectorStoreRetriever, memory: InMemoryChatMessageHistory) -> RunnableSerializable[Unknown, str]:
+def config_lore_chain(retriever: VectorStoreRetriever) -> RunnableSerializable[Unknown, str]:
     prompt = ChatPromptTemplate.from_messages(
         [("system", SYSTEM_PROMPT),
-         MessagesPlaceholder("history"),
-         ("human", "{question}")]
+         ("human", "{character_request}")]
     )
     
     inputs = {"context": retriever | format_docs_output,
-              "question": RunnablePassthrough(),
-              "destiny_roll": lambda _: get_destiny_roll(),
-              "history": lambda _: memory.messages}
+              "character_request": build_human_prompt,
+              "destiny_roll": lambda _: get_destiny_roll()}
     
     chain = (RunnableParallel(inputs) | 
             prompt | 
@@ -50,17 +48,3 @@ def config_chat_chain(retriever: VectorStoreRetriever, memory: InMemoryChatMessa
             PARSER)
     
     return chain
-
-# -------------------- // --------------------
-# 3. Create Chat Chain and Memory
-
-def create_chain_and_memory(retriever: VectorStoreRetriever) -> tuple[RunnableSerializable[Unknown, str], InMemoryChatMessageHistory]:
-    memory = InMemoryChatMessageHistory()
-    chain = config_chat_chain(retriever, memory)
-    
-    return chain, memory
-
-# if __name__ == "__main__":
-#     retriever = create_retriever()
-#     chain, memory = create_chain_and_memory(retriever)
-#     print(chain.config_schema)

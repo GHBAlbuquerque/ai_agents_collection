@@ -6,7 +6,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_openai import OpenAIEmbeddings
 from langchain_chroma import Chroma
 import streamlit as st
-from configs import FILES_FOLDER, EMBEDDING_MODEL, VECTOR_DB_FOLDER, COLLECTION_NAME
+from properties import FILES_FOLDER, EMBEDDING_MODEL, VECTOR_DB_FOLDER, COLLECTION_NAME
 from dotenv import load_dotenv
 
 load_dotenv()
