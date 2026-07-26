@@ -21,35 +21,37 @@ def setup_page():
     with st.form("character_setup_form"):
         st.write("Please provide the details to generate your RO character:")
         
-        char_name = st.text_input("Character Name (Optional)", max_chars=200)
-        char_class = st.selectbox(label="Character Class (Required)*", options=CLASSES_OPTIONS)
+        character_name = st.text_input("Character Name (Optional)", max_chars=200)
+        character_class = st.selectbox(label="Character Class (Required)*", options=CLASSES_OPTIONS)
         gender = st.selectbox("Gender (Required)*", GENDER_OPTIONS)
         birth_location = st.selectbox(label="Birth Location (Optional)", options=LOCATIONS_OPTIONS)
         char_age_input = st.text_input("Character Age (Optional)")
-        char_alignment = st.selectbox(label="Character Alignment (Optional)*", options=ALIGNMENT_OPTIONS)
+        character_alignment = st.selectbox(label="Character Alignment (Optional)*", options=ALIGNMENT_OPTIONS)
         description = st.text_area("Brief Description (Optional)*")
         
         submitted = st.form_submit_button("Generate Character Lore", type="primary")
         
         if submitted:
-            if not char_class or not gender:
+            if not character_class or not gender:
                 st.error("⚠️ Please fill in all required fields (Class and Gender).") 
             else:
-                char_age = int(char_age_input) if char_age_input.strip().isdigit() else None
+                character_age = int(char_age_input) if char_age_input.strip().isdigit() else None
                 
-                st.session_state['char_params'] = {
-                    "character_name": char_name,
-                    "character_class": char_class,
+                st.session_state['character_params'] = {
+                    "character_name": character_name,
+                    "character_class": character_class,
                     "gender": gender,
                     "birth_location": birth_location,
-                    "character_age": char_age,
-                    "char_alignment": char_alignment,
+                    "character_age": character_age,
+                    "character_alignment": character_alignment,
                     "description": description
                 }
                 st.session_state['setup_complete'] = True
                 st.rerun()
                 
 def character_lore_page():
+    # TODO: how do I pass my character_params to my chain?
+
     st.write("Welcome to your Character Lore page!")
 
 def main():
