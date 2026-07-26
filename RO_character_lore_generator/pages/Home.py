@@ -7,7 +7,10 @@ from parser import parse_lore_output
 
 def init():
     if 'setup_complete' not in st.session_state:
-        st.session_state['setup_complete'] = False    
+        st.session_state['setup_complete'] = False
+    
+    if "is_generating" not in st.session_state:
+        st.session_state["is_generating"] = False
     
     if 'chain' not in st.session_state or 'memory' not in st.session_state:
         with st.spinner("Initializing Vector Database..."):
@@ -31,32 +34,37 @@ def setup_page():
     character_alignment = st.selectbox(label="Character Alignment (Optional)*", options=ALIGNMENT_OPTIONS)
     description = st.text_area("Brief Description (Optional)*")
     
-    #TODO disable button
-    if st.button("Generate Character Lore", type="primary", use_container_width=True,):
+    generate_button = st.button("Generate Character Lore", type="primary", use_container_width=True, disabled=st.session_state['is_generating'])
+    
+    if generate_button:
         if not character_class or not gender:
             st.error("⚠️ Please fill in all required fields (Class and Gender).") 
         else:
-            character_age = int(char_age_input) if char_age_input.strip().isdigit() else None
-            
-            character_params = {
-                "character_name": character_name,
-                "character_class": character_class,
-                "gender": gender,
-                "birth_location": birth_location,
-                "character_age": character_age,
-                "character_alignment": character_alignment,
-                "description": description
-            }
-                
-            st.session_state['character_params'] = character_params
-            chain = st.session_state['chain']
-            
-            with st.spinner("Generating your character lore..."):
-                result = chain.invoke(character_params)
-                st.session_state['generated_lore'] = result
-            
-            st.session_state['setup_complete'] = True
+            st.session_state['is_generating'] = True
             st.rerun()
+            
+    if st.session_state['is_generating'] and not st.session_state['setup_complete']:
+        character_age = int(char_age_input) if char_age_input.strip().isdigit() else None
+        
+        character_params = {
+            "character_name": character_name,
+            "character_class": character_class,
+            "gender": gender,
+            "birth_location": birth_location,
+            "character_age": character_age,
+            "character_alignment": character_alignment,
+            "description": description
+        }
+            
+        st.session_state['character_params'] = character_params
+        chain = st.session_state['chain']
+        
+        with st.spinner("Generating your character lore..."):
+            result = chain.invoke(character_params)
+            st.session_state['generated_lore'] = result
+        
+        st.session_state['setup_complete'] = True
+        st.rerun()
                 
 def character_lore_page():
     st.markdown("<h2 style='text-align: center;'> RO Character Lore Generator</h2>", unsafe_allow_html=True)
@@ -104,36 +112,3 @@ def main():
     
 if __name__ == "__main__":
     main()
-
-
-# def chat_window():
-    
-#     st.markdown(
-#     "<h2 style='text-align: center;'> Welcome to RO Character Lore Generator</h2>",
-#     unsafe_allow_html=True
-#     )
-     
-#     chain = st.session_state['chain']
-#     memory = st.session_state['memory']
-#     history = memory.messages
-    
-#     container = st.container()
-#     for message in history:
-#         chat = container.chat_message(message.type)
-#         chat.markdown(message.content)
-        
-#     input = st.chat_input("Ask me anything!")
-#     if input:
-#         memory.add_user_message(input)
-        
-#         chat = container.chat_message('human')
-#         chat.markdown(input)
-        
-#         chat = container.chat_message('ai')
-#         chat.markdown("Generating answer...")
-
-#         answer = chain.invoke(input)
-#         formatted_answer = answer.replace('\n', '\n\n')
-        
-#         memory.add_ai_message(formatted_answer)
-#         st.rerun()

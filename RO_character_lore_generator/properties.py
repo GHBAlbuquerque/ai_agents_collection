@@ -79,7 +79,7 @@ CLASSES_OPTIONS = [
 "Oboro",
 "Rebel"
 ]
-GENDER_OPTIONS= ["Male", "Female", "Other"]
+GENDER_OPTIONS= ["Female", "Male", "Other"]
 LOCATIONS_OPTIONS= [
     "",
     "Prontera",
