@@ -1,3 +1,5 @@
+import time
+
 import streamlit as st
 
 from properties import ALIGNMENT_OPTIONS, CLASSES_OPTIONS, GENDER_OPTIONS, LOCATIONS_OPTIONS
@@ -9,8 +11,14 @@ def init():
     if 'setup_complete' not in st.session_state:
         st.session_state['setup_complete'] = False
     
-    if "is_generating" not in st.session_state:
-        st.session_state["is_generating"] = False
+    if "is_generating_lore" not in st.session_state:
+        st.session_state["is_generating_lore"] = False
+        
+    if "is_generating_pdf" not in st.session_state:
+        st.session_state["is_generating_pdf"] = False
+        
+    if "pdf_data" not in st.session_state:
+        st.session_state["pdf_data"] = False
     
     if 'chain' not in st.session_state or 'memory' not in st.session_state:
         with st.spinner("Initializing Vector Database..."):
@@ -34,16 +42,16 @@ def setup_page():
     character_alignment = st.selectbox(label="Character Alignment (Optional)*", options=ALIGNMENT_OPTIONS)
     description = st.text_area("Brief Description (Optional)*")
     
-    generate_button = st.button("Generate Character Lore", type="primary", use_container_width=True, disabled=st.session_state['is_generating'])
+    generate_button = st.button("Generate Character Lore", type="primary", use_container_width=True, disabled=st.session_state['is_generating_lore'])
     
     if generate_button:
         if not character_class or not gender:
             st.error("⚠️ Please fill in all required fields (Class and Gender).") 
         else:
-            st.session_state['is_generating'] = True
+            st.session_state['is_generating_lore'] = True
             st.rerun()
             
-    if st.session_state['is_generating'] and not st.session_state['setup_complete']:
+    if st.session_state['is_generating_lore'] and not st.session_state['setup_complete']:
         character_age = int(char_age_input) if char_age_input.strip().isdigit() else None
         
         character_params = {
@@ -69,7 +77,7 @@ def setup_page():
 def character_lore_page():
     st.markdown("<h2 style='text-align: center;'> RO Character Lore Generator</h2>", unsafe_allow_html=True)
     
-    generated_lore= st.session_state['generated_lore']
+    generated_lore = st.session_state['generated_lore']
     
     if generated_lore:
         data = parse_lore_output(generated_lore)
@@ -97,10 +105,40 @@ def character_lore_page():
                 st.markdown(f"**Act IV:** {data.get('act_4')}")
                 
             st.code(data.get("metadata", ""))
+    
+    pdf_button = st.button(label="Geneate PDF", 
+                           type="primary", 
+                           disabled=st.session_state['is_generating_pdf'], 
+                           use_container_width=True)
         
-    if st.button("Go back to character creation", type="secondary", use_container_width=True):
-        st.session_state['setup_complete'] = False
+    if pdf_button:
+        st.session_state['is_generating_pdf'] = True
+        st.session_state["pdf_data"] = None
         st.rerun()
+    
+    #TODO
+    if st.session_state['is_generating_pdf'] and not st.session_state["pdf_data"]:
+         with st.spinner("Generating your character lore PDF..."):
+            pdf_bytes = save_to_pdf(generated_lore)
+            st.session_state["pdf_data"] = pdf_bytes
+            st.session_state['is_generating_pdf'] = False
+            st.rerun()
+    
+    if st.button("Go back to character creation", type="secondary", use_container_width=True):
+        reset_session_state()
+        st.rerun()
+
+def save_to_pdf(generated_lore: str):
+    #TODO
+    st.toast("Generating your pdf...")
+    pass
+
+def reset_session_state():
+    st.session_state['setup_complete'] = False
+    st.session_state["is_generating_lore"] = False
+    st.session_state["is_generating_pdf"] = False
+    st.session_state["pdf_data"] = None
+    st.session_state["character_params"] = None
 
 def main():
     init()
