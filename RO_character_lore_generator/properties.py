@@ -62,7 +62,7 @@ CLASSES_OPTIONS = [
 "Warlock",
 "Ranger",
 "Mechanic",
-"Guillotine Cross,"
+"Guillotine Cross",
 "Arch Bishop",
 "Royal Guard",
 "Sorcerer",
@@ -71,7 +71,7 @@ CLASSES_OPTIONS = [
 "Geneticist",
 "Shadow Chaser",
 "Sura",
-"Taekwon Boy/Girl,"
+"Taekwon Boy/Girl",
 "Ninja",
 "Gunslinger",
 "Taekwon Master",

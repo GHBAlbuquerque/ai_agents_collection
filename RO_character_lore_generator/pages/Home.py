@@ -3,7 +3,7 @@ import streamlit as st
 from properties import ALIGNMENT_OPTIONS, CLASSES_OPTIONS, GENDER_OPTIONS, LOCATIONS_OPTIONS
 from ingestion import create_retriever
 from agent import config_lore_chain
-from parser import parse_lore_output
+from ouput_parser import parse_lore_output
 from output_file_generator import save_txt_to_system, create_pdf_from_string
 
 def init():
@@ -17,7 +17,7 @@ def init():
         st.session_state["is_generating_pdf"] = False
         
     if "pdf_data" not in st.session_state:
-        st.session_state["pdf_data"] = False
+        st.session_state["pdf_data"] = None
     
     if 'chain' not in st.session_state or 'memory' not in st.session_state:
         with st.spinner("Initializing Vector Database..."):
@@ -77,6 +77,7 @@ def character_lore_page():
     st.markdown("<h2 style='text-align: center;'> RO Character Lore Generator</h2>", unsafe_allow_html=True)
     
     generated_lore = st.session_state['generated_lore']
+    st.session_state['is_generating_lore'] = False
     
     if generated_lore:
         data = parse_lore_output(generated_lore)
@@ -107,7 +108,7 @@ def character_lore_page():
                 
             st.code(data.get("metadata", ""))
     
-        pdf_button = st.button(label="Geneate PDF", 
+        pdf_button = st.button(label="Save as PDF", 
                             type="primary", 
                             disabled=st.session_state['is_generating_pdf'], 
                             use_container_width=True)
@@ -121,7 +122,6 @@ def character_lore_page():
             with st.spinner("Generating your character lore PDF..."):
                 pdf_bytes = create_pdf_from_string(generated_lore)
                 st.session_state["pdf_data"] = pdf_bytes
-                st.session_state['is_generating_pdf'] = False
         
         if st.session_state['pdf_data']:
             
@@ -133,6 +133,24 @@ def character_lore_page():
                 use_container_width=True,
                 type="primary"
             )
+    
+        try_again = st.button(label="Don't like it? Try again", 
+                        type="primary", 
+                        disabled=st.session_state['is_generating_lore'], 
+                        use_container_width=True)
+        
+        if try_again:
+            chain = st.session_state['chain']
+            character_params = st.session_state['character_params']
+            
+            with st.spinner("Generating again your character lore..."):
+                st.session_state['is_generating_lore'] = True
+                result = chain.invoke(character_params)
+                
+                st.session_state['generated_lore'] = result
+                st.session_state['setup_complete'] = True
+                # TODO: should scroll to top when re-executing
+                st.rerun()
     
     if st.button("Go back to character creation", type="secondary", use_container_width=True):
         reset_session_state()
