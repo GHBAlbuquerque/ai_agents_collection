@@ -21,13 +21,13 @@ RO_character_lore_generator/
 
 ## ⚙️ How to Run
 
-1. **Environment Setup:** Ensure you have a `.env` file with your API keys configured (e.g., `OPENAI_API_KEY`)
-
-2. **Install Dependencies:**
-```bash
-pip install -r requirements.txt
-```
-3. Start the Application:
-```bash
-python -m streamlit run main.py
-```
+1. **Environment Setup:** Make sure you have your `.env` file configured in the project directory with your API keys (e.g., `OPENAI_API_KEY`, OMDb keys).
+2. **Start the Server:**
+   Run
+   ```bash
+   dotenv run python main.py
+   ```
+    OR 
+   ```bash
+   python main.py
+   ```

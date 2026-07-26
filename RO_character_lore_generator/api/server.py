@@ -1,9 +1,11 @@
 # 🆕 FastAPI server (exposes your python functions via HTTP)
-
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException, Response
 from fastapi.middleware.cors import CORSMiddleware
-from properties import ALIGNMENT_OPTIONS, CLASSES_OPTIONS, GENDER_OPTIONS, LOCATIONS_OPTIONS
-from api.models import CharacterLoreCreationRequest, CharacterLoreCreationResponse
+from core.properties import ALIGNMENT_OPTIONS, CLASSES_OPTIONS, GENDER_OPTIONS, LOCATIONS_OPTIONS
+from api.models import CharacterLoreCreationRequest, CharacterLoreCreationData
+from core.agent import get_character_lore
+from core.output_file_generator import create_pdf_from_string, format_lore_data_to_text
+
 
 app = FastAPI(
     title="RO Character Lore Generator",
@@ -30,7 +32,7 @@ app.add_middleware(
 def read_root():
     return {"message": "Character Lore Generator API is running!"}
 
-# GET/api/options
+# GET /api/options
 @app.get("/api/options",
     tags=["options"],
     summary="Returns Lore Generator Options",
@@ -48,13 +50,34 @@ async def get_options():
     tags=["lore", "post", "character"],
     summary="Generate a new character lore",
     description="Generate a new character lore for Ragnarok Online characters using AI.",
-    response_model=CharacterLoreCreationResponse)
+    response_model=CharacterLoreCreationData)
 async def generate_lore(request: CharacterLoreCreationRequest):
-    return CharacterLoreCreationResponse()
+    try:
+        return get_character_lore(request)
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Error trying to generate lore: {str(e)}"
+        )
 
 # POST /api/generate-pdf
-@app.post("/api/generate-pdf")
-async def generate_pdf():
-    return {
-        "message": "PDF generated successfully!"
-    }
+@app.post("/api/generate-pdf",
+    tags=["pdf"],
+    summary="Generate a PDF file for character lore",
+    description="Builds and returns a PDF document based on character lore data.")
+async def generate_pdf(request: CharacterLoreCreationData):
+    try:
+        formatted_text = format_lore_data_to_text(request)
+        pdf_bytes = create_pdf_from_string(formatted_text)
+        
+        filename = f"{request.name or 'Character'}_Lore.pdf"
+        return Response(
+            content=pdf_bytes,
+            media_type="application/pdf",
+            headers={"Content-Disposition": f'attachment; filename="{filename}"'}
+        )
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Error trying to generate PDF: {str(e)}"
+        )

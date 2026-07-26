@@ -1,5 +1,5 @@
 import io
-from properties import OUTPUT_FOLDER
+from core.properties import OUTPUT_FOLDER
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
@@ -55,3 +55,31 @@ def save_txt_to_system(generated_lore: str, file_name:str):
     OUTPUT_FOLDER.mkdir(parents=True, exist_ok=True)
 
     txt_path.write_text(generated_lore, encoding="utf-8")
+
+
+def format_lore_data_to_text(data) -> str:
+    """
+    Formats a CharacterLoreCreationData or dictionary into a structured readable string for PDF creation.
+    """
+    lines = [
+        f"Character Name: {data.get('name', 'Unknown')}",
+        f"Character Class: {data.get('class', '')}",
+        f"Gender: {data.get('gender', '')}",
+        f"Place of Birth: {data.get('place_of_birth', '')}",
+        f"Role: {data.get('role', '')}",
+        "",
+        "Detailed Description:",
+        f"{data.get('description', '')}",
+        "",
+        "Character Lore:",
+        f"Act I: {data.get('act_1', '')}",
+        "",
+        f"Act II: {data.get('act_2', '')}",
+        "",
+        f"Act III: {data.get('act_3', '')}",
+        "",
+        f"Act IV: {data.get('act_4', '')}",
+        "",
+        f"Metadata: {data.get('metadata', '')}"
+    ]
+    return "\n".join(lines)

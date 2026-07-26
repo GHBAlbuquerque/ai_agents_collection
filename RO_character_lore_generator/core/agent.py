@@ -2,15 +2,16 @@ import random
 from langchain_openai import ChatOpenAI
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.vectorstores import VectorStoreRetriever
-from langchain_core.runnables import RunnableParallel, RunnablePassthrough, RunnableSerializable
-from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain_core.chat_history import InMemoryChatMessageHistory
+from langchain_core.runnables import RunnableParallel, RunnableSerializable
+from langchain_core.prompts import ChatPromptTemplate
+from api.models import CharacterLoreCreationRequest, CharacterLoreCreationData
+from core.ouput_parser import parse_lore_output
 from langchain_core.documents import Document
 from narwhals import Unknown
-from properties import MODEL_NAME
-from prompt import SYSTEM_PROMPT, build_human_prompt
+from core.properties import MODEL_NAME
+from core.prompts import SYSTEM_PROMPT, build_human_prompt
 
-from ingestion import create_retriever
+from core.ingestion import create_retriever
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -48,3 +49,26 @@ def config_lore_chain(retriever: VectorStoreRetriever) -> RunnableSerializable[U
             PARSER)
     
     return chain
+
+
+# -------------------- // --------------------
+# 3. High-level Execution Helper
+
+_lore_chain = None
+
+def get_lore_chain():
+    global _lore_chain
+    if _lore_chain is None:
+        retriever = create_retriever()
+        _lore_chain = config_lore_chain(retriever)
+    return _lore_chain
+
+
+def get_character_lore(request: CharacterLoreCreationRequest) -> CharacterLoreCreationData:
+    """
+    Executes the lore generation chain with the given request data 
+    and returns a structured CharacterLoreCreationData.
+    """
+    chain = get_lore_chain()
+    raw_output = chain.invoke(request)
+    return parse_lore_output(raw_output)

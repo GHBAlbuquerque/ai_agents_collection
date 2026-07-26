@@ -1,6 +1,6 @@
-from .dtos import CharacterLoreCreationRequest, CharacterLoreCreationResponse
+from .dtos import CharacterLoreCreationRequest, CharacterLoreCreationData
 
 __all__ = [
     "CharacterLoreCreationRequest",
-    "CharacterLoreCreationResponse"
+    "CharacterLoreCreationData"
 ]

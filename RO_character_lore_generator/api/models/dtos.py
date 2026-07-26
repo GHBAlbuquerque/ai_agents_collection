@@ -11,7 +11,7 @@ class CharacterLoreCreationRequest(BaseModel):
     description: Optional[str] = Field(default=None, description="Brief Description (Optional)")
 
 
-class CharacterLoreCreationResponse(BaseModel):
+class CharacterLoreCreationData(BaseModel):
     model_config = ConfigDict(populate_by_name=True)
 
     name: str = Field(default="", description="Character Name")

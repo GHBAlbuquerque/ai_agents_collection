@@ -6,7 +6,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_openai import OpenAIEmbeddings
 from langchain_chroma import Chroma
 import streamlit as st
-from properties import FILES_FOLDER, EMBEDDING_MODEL, VECTOR_DB_FOLDER, COLLECTION_NAME
+from core.properties import FILES_FOLDER, EMBEDDING_MODEL, VECTOR_DB_FOLDER, COLLECTION_NAME
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -74,7 +74,3 @@ def create_retriever() -> VectorStoreRetriever:
         search_kwargs = {"k":2, "fetch_k":10},
         search_type="mmr"
     )
-
-# if __name__ == "__main__":
-#     retriever = create_retriever()
-#     print(retriever.model_config)

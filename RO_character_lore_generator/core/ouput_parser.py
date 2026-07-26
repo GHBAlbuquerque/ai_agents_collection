@@ -1,7 +1,7 @@
 import re
-from api.models import CharacterLoreCreationResponse
+from api.models import CharacterLoreCreationData
 
-def parse_lore_output(raw_text: str) -> CharacterLoreCreationResponse:
+def parse_lore_output(raw_text: str) -> CharacterLoreCreationData:
     parsed = {}
     
     parsed["name"] = re.search(r"Character Name:\s*(.*)", raw_text)
@@ -27,4 +27,4 @@ def parse_lore_output(raw_text: str) -> CharacterLoreCreationResponse:
         else:
             cleaned[k] = ""
             
-    return CharacterLoreCreationResponse(**cleaned)
+    return CharacterLoreCreationData(**cleaned)

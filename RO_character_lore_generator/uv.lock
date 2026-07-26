@@ -4058,6 +4058,7 @@ dependencies = [
     { name = "reportlab" },
     { name = "streamlit" },
     { name = "unstructured", extra = ["pdf"] },
+    { name = "uvicorn" },
 ]
 
 [package.metadata]
@@ -4074,6 +4075,7 @@ requires-dist = [
     { name = "reportlab", specifier = ">=5.0.0" },
     { name = "streamlit", specifier = ">=1.59.2" },
     { name = "unstructured", extras = ["pdf"], specifier = ">=0.24.1" },
+    { name = "uvicorn", specifier = ">=0.51.0" },
 ]
 
 [[package]]

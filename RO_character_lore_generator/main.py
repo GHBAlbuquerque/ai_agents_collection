@@ -1,7 +1,11 @@
-import streamlit as st
+import uvicorn
 
-home = st.Page("pages/Home.py", title="Home", default=True)
-
-pg = st.navigation([home])
-
-pg.run()
+if __name__ == "__main__":
+    uvicorn.run(
+        "api.server:app",
+        host="0.0.0.0",
+        port=8000,
+        reload=True,
+        log_level="info",
+        access_log=True
+    )

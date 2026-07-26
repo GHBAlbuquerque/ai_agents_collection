@@ -1,7 +1,9 @@
-with open("examples/Lore_Example_Repository.md", "r", encoding="utf-8") as file:
+from core.properties import EXAMPLES_FOLDER
+
+with open(EXAMPLES_FOLDER / "Lore_Example_Repository.md", "r", encoding="utf-8") as file:
     static_lore_examples = file.read()
     
-with open("examples/Fantasy_Names_Repository.md", "r", encoding="utf-8") as file:
+with open(EXAMPLES_FOLDER / "Fantasy_Names_Repository.md", "r", encoding="utf-8") as file:
     static_name_examples = file.read()
 
 SYSTEM_PROMPT = f"""
