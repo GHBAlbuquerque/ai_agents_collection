@@ -16,7 +16,9 @@ def init():
             st.session_state['chain'] = chain
 
 def setup_page():
-    st.markdown("<h2 style='text-align: center;'>📝 Character Setup</h2>", unsafe_allow_html=True) 
+    st.markdown("<h2 style='text-align: center;'>🤖 RO Character Lore Generator</h2>", unsafe_allow_html=True)
+
+    st.markdown("<h3 style='text-align: center;'>📝 Character Setup</h3>", unsafe_allow_html=True) 
     
     with st.form("character_setup_form"):
         st.write("Please provide the details to generate your RO character:")
@@ -37,7 +39,7 @@ def setup_page():
             else:
                 character_age = int(char_age_input) if char_age_input.strip().isdigit() else None
                 
-                st.session_state['character_params'] = {
+                character_params = {
                     "character_name": character_name,
                     "character_class": character_class,
                     "gender": gender,
@@ -46,13 +48,24 @@ def setup_page():
                     "character_alignment": character_alignment,
                     "description": description
                 }
+                 
+                st.session_state['character_params'] = character_params
+    
+                chain = st.session_state['chain']
+                with st.spinner("Generating your character lore..."):
+                    result = chain.invoke(character_params)
+                    st.session_state['generated_lore'] = result
+                
                 st.session_state['setup_complete'] = True
                 st.rerun()
                 
 def character_lore_page():
-    # TODO: how do I pass my character_params to my chain?
-
-    st.write("Welcome to your Character Lore page!")
+    st.markdown("<h2 style='text-align: center;'>🤖 RO Character Lore Generator</h2>", unsafe_allow_html=True)
+    
+    generated_lore= st.session_state['generated_lore']
+    formatted_lore = generated_lore.replace('\n', '\n\n')
+    
+    st.write(formatted_lore)
 
 def main():
     init()

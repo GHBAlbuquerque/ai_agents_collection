@@ -16,8 +16,6 @@
 * Iris Bornhausen
 * Seraphine Winterblessed
 * Lenneth Loire
-* Sigrist
-* Astele
 
 ### Name and Composite Surname
 * Harper Raine-Rutherford
@@ -26,6 +24,10 @@
 ### Name, Abbreviated Middle Name, and Surname
 * Selena T. Artephius
 * Harriet L. Eisenhart
+
+# Only First Name Known
+* Sigrist
+* Astele
 
 ### Sobriquets
 * The Silver-Eyed
@@ -54,6 +56,8 @@
 * Kaelen Loire
 * Leander Belfast
 * Arthur Pentaghast
+
+# Only First Name Known
 * Fenris
 * Vael
 

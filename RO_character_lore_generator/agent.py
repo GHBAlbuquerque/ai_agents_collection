@@ -38,8 +38,8 @@ def config_lore_chain(retriever: VectorStoreRetriever) -> RunnableSerializable[U
          ("human", "{character_request}")]
     )
     
-    inputs = {"context": retriever | format_docs_output,
-              "character_request": build_human_prompt,
+    inputs = {"character_request": lambda character_params: build_human_prompt(character_params),
+              "context": lambda _: format_docs_output(retriever.invoke("Ragnarok Online general world lore history and factions")),
               "destiny_roll": lambda _: get_destiny_roll()}
     
     chain = (RunnableParallel(inputs) | 

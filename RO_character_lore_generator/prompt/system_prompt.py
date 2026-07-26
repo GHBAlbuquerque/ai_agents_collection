@@ -63,6 +63,7 @@ Place of Birth: [Insert Birth Location]
 Role: [Briefly describe their role in the overall plot]
 Detailed Description: [Write between 300 and 500 characters focusing on appearance, seamlessly integrating the exact class attire guidelines]
 Character Lore: [Write between 500 and 1500 characters strictly following the four-act narrative structure]
+Metadata: [A dictionary with the fields 'alignment' and 'destiny' of the character]
 
 Context:
 {{context}}
