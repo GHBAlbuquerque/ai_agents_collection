@@ -12,3 +12,6 @@ wheels/
 
 # DB folder
 /vector_db/*
+
+# outputs folder
+/outputs/*

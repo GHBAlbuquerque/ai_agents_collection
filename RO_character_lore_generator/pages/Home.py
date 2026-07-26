@@ -1,11 +1,10 @@
-import time
-
 import streamlit as st
 
 from properties import ALIGNMENT_OPTIONS, CLASSES_OPTIONS, GENDER_OPTIONS, LOCATIONS_OPTIONS
 from ingestion import create_retriever
 from agent import config_lore_chain
 from parser import parse_lore_output
+from output_file_generator import save_txt_to_system, create_pdf_from_string
 
 def init():
     if 'setup_complete' not in st.session_state:
@@ -81,6 +80,8 @@ def character_lore_page():
     
     if generated_lore:
         data = parse_lore_output(generated_lore)
+        file_name = f"{data.get('name', 'Character')}_Lore"
+        save_txt_to_system(generated_lore, file_name)
         
         with st.container():
             col1, col2 = st.columns(2)
@@ -106,32 +107,37 @@ def character_lore_page():
                 
             st.code(data.get("metadata", ""))
     
-    pdf_button = st.button(label="Geneate PDF", 
-                           type="primary", 
-                           disabled=st.session_state['is_generating_pdf'], 
-                           use_container_width=True)
+        pdf_button = st.button(label="Geneate PDF", 
+                            type="primary", 
+                            disabled=st.session_state['is_generating_pdf'], 
+                            use_container_width=True)
         
-    if pdf_button:
-        st.session_state['is_generating_pdf'] = True
-        st.session_state["pdf_data"] = None
-        st.rerun()
-    
-    #TODO
-    if st.session_state['is_generating_pdf'] and not st.session_state["pdf_data"]:
-         with st.spinner("Generating your character lore PDF..."):
-            pdf_bytes = save_to_pdf(generated_lore)
-            st.session_state["pdf_data"] = pdf_bytes
-            st.session_state['is_generating_pdf'] = False
+        if pdf_button:
+            st.session_state['is_generating_pdf'] = True
+            st.session_state["pdf_data"] = None
             st.rerun()
+        
+        if st.session_state['is_generating_pdf'] and not st.session_state["pdf_data"]:
+            with st.spinner("Generating your character lore PDF..."):
+                pdf_bytes = create_pdf_from_string(generated_lore)
+                st.session_state["pdf_data"] = pdf_bytes
+                st.session_state['is_generating_pdf'] = False
+        
+        if st.session_state['pdf_data']:
+            
+            st.download_button(
+                label="Download Lore PDF",
+                data= st.session_state["pdf_data"],
+                file_name=file_name+".pdf",
+                mime="application/pdf",
+                use_container_width=True,
+                type="primary"
+            )
     
     if st.button("Go back to character creation", type="secondary", use_container_width=True):
         reset_session_state()
         st.rerun()
 
-def save_to_pdf(generated_lore: str):
-    #TODO
-    st.toast("Generating your pdf...")
-    pass
 
 def reset_session_state():
     st.session_state['setup_complete'] = False
@@ -139,6 +145,10 @@ def reset_session_state():
     st.session_state["is_generating_pdf"] = False
     st.session_state["pdf_data"] = None
     st.session_state["character_params"] = None
+
+def inspect_session_state():
+    with st.expander("🔍 Inspect Session State"):
+        st.write(st.session_state)
 
 def main():
     init()
