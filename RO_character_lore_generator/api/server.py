@@ -36,7 +36,6 @@ app.add_middleware(
     summary="Returns Lore Generator Options",
     description="Returns all the options available for the lore generator.")
 async def get_options():
-    print(ALIGNMENT_OPTIONS)
     return {
         "alignments": ALIGNMENT_OPTIONS,
         "classes": CLASSES_OPTIONS,

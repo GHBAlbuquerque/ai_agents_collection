@@ -41,18 +41,36 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==========================================
     let currentLoreData = null; // Holds the latest generated lore payload for the PDF endpoint
 
-    // Placeholder for future sound effects
-    const sounds = {
-        click: new Audio('assets/sfx/click.mp3'),
-        success: new Audio('assets/sfx/success.mp3'),
-        error: new Audio('assets/sfx/error.mp3')
-    };
-
-    const playSound = (type) => {
-        // Uncomment once assets are added:
-        // sounds[type].currentTime = 0;
-        // sounds[type].play().catch(e => console.log("Audio play blocked by browser", e));
-    };
+    // ==========================================
+    // TOAST NOTIFICATION LOGIC
+    // ==========================================
+    function showToast(message) {
+        // Create the toast element
+        const toast = document.createElement("div");
+        toast.textContent = message;
+        
+        // Apply inline styles (you can also move these to your ro-theme.css as a .toast class)
+        toast.style.position = "fixed";
+        toast.style.bottom = "20px";
+        toast.style.right = "20px";
+        toast.style.backgroundColor = "rgba(220, 53, 69, 0.95)"; // A nice error red
+        toast.style.color = "white";
+        toast.style.padding = "12px 24px";
+        toast.style.borderRadius = "4px";
+        toast.style.boxShadow = "0 4px 6px rgba(0,0,0,0.3)";
+        toast.style.zIndex = "9999";
+        toast.style.transition = "opacity 0.3s ease";
+        toast.style.opacity = "1";
+        
+        // Add to body
+        document.body.appendChild(toast);
+        
+        // Fade out and remove after 3 seconds
+        setTimeout(() => {
+            toast.style.opacity = "0";
+            setTimeout(() => toast.remove(), 300); // Wait for fade transition
+        }, 3000);
+    }
 
     // ==========================================
     // INITIALIZATION (Fetch Options)
@@ -72,6 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         } catch (error) {
             console.error("Error loading options:", error);
+            showToast("Something went wrong. Please contact the admin.");
             // Fallbacks to hardcoded HTML if backend is unreachable on load
         }
     }
@@ -117,7 +136,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // GENERATE LORE (API Call)
     // ==========================================
     async function generateLore(isRetry = false) {
-        playSound('click');
         
         // Validate required fields if not a retry
         if (!isRetry && (!form.checkValidity() || !charClass.value || !charGender.value)) {
@@ -161,12 +179,10 @@ document.addEventListener("DOMContentLoaded", () => {
             // Swap windows
             setupWindow.classList.add("hidden");
             loreWindow.classList.remove("hidden");
-            playSound('success');
 
         } catch (error) {
             console.error("Error generating lore:", error);
-            alert("The Server-side spell failed to cast. Check the console for details.");
-            playSound('error');
+            showToast("The Server-side spell failed to cast. Check the console for details.");
         } finally {
             // Restore UI State
             activeBtn.textContent = originalBtnText;
@@ -207,6 +223,8 @@ document.addEventListener("DOMContentLoaded", () => {
             outMetadata.textContent = JSON.stringify(metaObj, null, 2);
         } catch (e) {
             outMetadata.textContent = data.metadata || "{}";
+            console.error(e)
+            //showToast("Something went wrong. Please contact the admin.");
         }
     }
 
@@ -215,7 +233,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==========================================
     pdfBtn.addEventListener("click", async () => {
         if (!currentLoreData) return;
-        playSound('click');
 
         pdfBtn.textContent = "Scribing Parchment...";
         pdfBtn.disabled = true;
@@ -248,11 +265,9 @@ document.addEventListener("DOMContentLoaded", () => {
             window.URL.revokeObjectURL(url);
             a.remove();
             
-            playSound('success');
         } catch (error) {
             console.error("Error downloading PDF:", error);
-            alert("Failed to scribe the PDF document.");
-            playSound('error');
+            showToast("Something went wrong. Please contact the admin.");
         } finally {
             pdfBtn.textContent = "Save as PDF";
             pdfBtn.disabled = false;
@@ -263,7 +278,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // NAVIGATION
     // ==========================================
     backBtn.addEventListener("click", () => {
-        playSound('click');
         loreWindow.classList.add("hidden");
         setupWindow.classList.remove("hidden");
         

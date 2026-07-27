@@ -71,6 +71,38 @@ body, html {
 }
 
 /* =========================================
+   APP OVERLAY TITLE
+========================================= */
+.app-title {
+    position: fixed;
+    top: 32px;
+    left: 32px;
+    z-index: 9999; /* Forces it above the glassmorphism backdrop */
+    pointer-events: none;
+    
+    /* Typography constraints */
+    font-family: var(--font-pixel-ui);
+    color: #ffffff;
+    font-size: 0.75rem; /* Scaled down to prevent overlapping the central windows */
+    line-height: 1.6;
+    max-width: 250px; /* Forces the text to wrap neatly in the corner */
+    
+    /* Perfect 8-way solid pixel stroke + classic drop shadow */
+    text-shadow: 
+        1px 1px 0 #575757,
+       -1px 1px 0 #575757,
+        1px -1px 0 #575757,
+       -1px -1px 0 #575757,
+        0px 1px 0 #575757,
+        0px -1px 0 #575757,
+       -1px 0px 0 #575757,
+        1px 0px 0 #575757,
+        3px 3px 0 rgba(0,0,0,0.6); 
+}
+
+
+
+/* =========================================
    RO WINDOW SYSTEM (Generic)
 ========================================= */
 .ro-window {
