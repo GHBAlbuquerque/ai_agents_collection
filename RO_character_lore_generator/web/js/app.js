@@ -91,25 +91,27 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==========================================
     function updateSprite() {
         const selectedClass = charClass.value;
-        const selectedGender = charGender.value;
 
-        if (selectedClass && selectedGender) {
-            const assetName = `${selectedClass.toLowerCase()}_${selectedGender.toLowerCase()}.gif`;
-            // Temporary placeholder until assets are added
+        if (selectedClass) {
+            // Formats "Swordsman" to "swordsman.png" to match your folder
+            const assetName = `${selectedClass.toLowerCase()}.png`;
+            
+            // Replaces the placeholder text with the actual image tag
             spritePreview.innerHTML = `
-                <div style="font-family: var(--font-pixel-ui); font-size: 0.6rem; text-align: center; color: #555;">
-                    [Asset Linked]<br>${assetName}
-                </div>
+                <img 
+                    src="assets/sprites/${assetName}" 
+                    alt="${selectedClass} Class Sprite" 
+                    style="max-width: 250px; max-height: 250px; object-fit: contain; image-rendering: pixelated;"
+                >
             `;
-            // Real implementation for later:
-            // spritePreview.innerHTML = `<img src="assets/sprites/${assetName}" alt="${selectedClass}" style="max-width: 100%; max-height: 100%; image-rendering: pixelated;">`;
         } else {
-            spritePreview.innerHTML = '<p class="sprite-placeholder">Awaiting<br>Details</p>';
+            // Fallback if they somehow deselect a class
+            spritePreview.innerHTML = '<p class="sprite-placeholder">No Class<br>Selected</p>';
         }
     }
 
-    charClass.addEventListener("change", updateSprite);
-    charGender.addEventListener("change", updateSprite);
+    if (charClass) charClass.addEventListener("change", updateSprite);
+    if (charGender) charGender.addEventListener("change", updateSprite);
 
     // ==========================================
     // GENERATE LORE (API Call)
