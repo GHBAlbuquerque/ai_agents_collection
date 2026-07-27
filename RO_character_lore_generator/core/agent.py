@@ -7,7 +7,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from api.models import CharacterLoreCreationRequest, CharacterLoreCreationData
 from core.ouput_parser import parse_lore_output
 from langchain_core.documents import Document
-from narwhals import Unknown
+from typing import Any
 from core.properties import MODEL_NAME
 from core.prompts import SYSTEM_PROMPT, build_human_prompt
 
@@ -33,7 +33,8 @@ def format_docs_output(documents: list[Document]):
 MODEL = ChatOpenAI(model=MODEL_NAME)
 PARSER = StrOutputParser()
 
-def config_lore_chain(retriever: VectorStoreRetriever) -> RunnableSerializable[Unknown, str]:
+def config_lore_chain(retriever: VectorStoreRetriever) -> RunnableSerializable[Any, str]:
+
     prompt = ChatPromptTemplate.from_messages(
         [("system", SYSTEM_PROMPT),
          ("human", "{character_request}")]
