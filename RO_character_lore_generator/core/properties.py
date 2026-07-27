@@ -12,7 +12,6 @@ MODEL_NAME = "gpt-5.4-mini"
 
 # Lore related variables
 ALIGNMENT_OPTIONS = [
-    "",
     "Lawful Good",
     "Neutral Good",
     "Chaotic Good",
@@ -82,7 +81,6 @@ CLASSES_OPTIONS = [
 ]
 GENDER_OPTIONS= ["Female", "Male", "Other"]
 LOCATIONS_OPTIONS= [
-    "",
     "Prontera",
     "Izlude",
     "Geffen",

@@ -1,0 +1,274 @@
+document.addEventListener("DOMContentLoaded", () => {
+    // ==========================================
+    // DOM ELEMENTS
+    // ==========================================
+    // Windows
+    const setupWindow = document.getElementById("setup-window");
+    const loreWindow = document.getElementById("lore-window");
+    
+    // Form Inputs
+    const form = document.getElementById("lore-form");
+    const charName = document.getElementById("char-name");
+    const charClass = document.getElementById("char-class");
+    const charGender = document.getElementById("char-gender");
+    const charLocation = document.getElementById("char-location");
+    const charAge = document.getElementById("char-age");
+    const charAlignment = document.getElementById("char-alignment");
+    const charDesc = document.getElementById("char-desc");
+    const spritePreview = document.getElementById("sprite-preview");
+    
+    // Buttons
+    const generateBtn = document.getElementById("generate-btn");
+    const pdfBtn = document.getElementById("pdf-btn");
+    const backBtn = document.getElementById("back-btn");
+    const retryBtn = document.getElementById("retry-btn");
+    
+    // Output Elements
+    const outName = document.getElementById("out-name");
+    const outClass = document.getElementById("out-class");
+    const outGender = document.getElementById("out-gender");
+    const outLocation = document.getElementById("out-location");
+    const outRole = document.getElementById("out-role");
+    const outDesc = document.getElementById("out-desc");
+    const outAct1 = document.getElementById("out-act1");
+    const outAct2 = document.getElementById("out-act2");
+    const outAct3 = document.getElementById("out-act3");
+    const outAct4 = document.getElementById("out-act4");
+    const outMetadata = document.getElementById("out-metadata");
+
+    // ==========================================
+    // STATE & ASSETS
+    // ==========================================
+    let currentLoreData = null; // Holds the latest generated lore payload for the PDF endpoint
+
+    // Placeholder for future sound effects
+    const sounds = {
+        click: new Audio('assets/sfx/click.mp3'),
+        success: new Audio('assets/sfx/success.mp3'),
+        error: new Audio('assets/sfx/error.mp3')
+    };
+
+    const playSound = (type) => {
+        // Uncomment once assets are added:
+        // sounds[type].currentTime = 0;
+        // sounds[type].play().catch(e => console.log("Audio play blocked by browser", e));
+    };
+
+    // ==========================================
+    // INITIALIZATION (Fetch Options)
+    // ==========================================
+    async function loadOptions() {
+        try {
+            const response = await fetch('/api/options');
+            if (!response.ok) throw new Error("Failed to fetch options");
+            
+            const data = await response.json();
+            
+            // Populate select fields dynamically
+            populateSelect(charClass, data.classes, "Select Class");
+            populateSelect(charGender, data.genders, "Select Gender");
+            populateSelect(charLocation, data.locations, "Any Location");
+            populateSelect(charAlignment, data.alignments, "Any Alignment");
+
+        } catch (error) {
+            console.error("Error loading options:", error);
+            // Fallbacks to hardcoded HTML if backend is unreachable on load
+        }
+    }
+
+    function populateSelect(selectElement, optionsArray, defaultText) {
+        selectElement.innerHTML = `<option value="" ${defaultText.includes('Select') ? 'disabled' : ''} selected>${defaultText}</option>`;
+        optionsArray.forEach(opt => {
+            const option = document.createElement("option");
+            option.value = opt;
+            option.textContent = opt;
+            selectElement.appendChild(option);
+        });
+    }
+
+    // ==========================================
+    // SPRITE PREVIEW LOGIC
+    // ==========================================
+    function updateSprite() {
+        const selectedClass = charClass.value;
+        const selectedGender = charGender.value;
+
+        if (selectedClass && selectedGender) {
+            const assetName = `${selectedClass.toLowerCase()}_${selectedGender.toLowerCase()}.gif`;
+            // Temporary placeholder until assets are added
+            spritePreview.innerHTML = `
+                <div style="font-family: var(--font-pixel-ui); font-size: 0.6rem; text-align: center; color: #555;">
+                    [Asset Linked]<br>${assetName}
+                </div>
+            `;
+            // Real implementation for later:
+            // spritePreview.innerHTML = `<img src="assets/sprites/${assetName}" alt="${selectedClass}" style="max-width: 100%; max-height: 100%; image-rendering: pixelated;">`;
+        } else {
+            spritePreview.innerHTML = '<p class="sprite-placeholder">Awaiting<br>Details</p>';
+        }
+    }
+
+    charClass.addEventListener("change", updateSprite);
+    charGender.addEventListener("change", updateSprite);
+
+    // ==========================================
+    // GENERATE LORE (API Call)
+    // ==========================================
+    async function generateLore(isRetry = false) {
+        playSound('click');
+        
+        // Validate required fields if not a retry
+        if (!isRetry && (!form.checkValidity() || !charClass.value || !charGender.value)) {
+            form.reportValidity();
+            return;
+        }
+
+        // Prepare payload matching CharacterLoreCreationRequest model
+        const requestPayload = {
+            character_name: charName.value.trim() || undefined,
+            character_class: charClass.value,
+            gender: charGender.value,
+            birth_location: charLocation.value || undefined,
+            character_age: charAge.value ? parseInt(charAge.value, 10) : undefined,
+            character_alignment: charAlignment.value || undefined,
+            description: charDesc.value.trim() || undefined
+        };
+
+        // UI Loading State
+        const originalBtnText = isRetry ? retryBtn.textContent : generateBtn.textContent;
+        const activeBtn = isRetry ? retryBtn : generateBtn;
+        
+        activeBtn.textContent = "Casting Spell...";
+        activeBtn.disabled = true;
+        document.body.style.cursor = "wait";
+
+        try {
+            const response = await fetch('/api/generate-lore', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(requestPayload)
+            });
+
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            
+            const data = await response.json();
+            currentLoreData = data; // Save for PDF generation
+            
+            renderLoreWindow(data);
+            
+            // Swap windows
+            setupWindow.classList.add("hidden");
+            loreWindow.classList.remove("hidden");
+            playSound('success');
+
+        } catch (error) {
+            console.error("Error generating lore:", error);
+            alert("The Server-side spell failed to cast. Check the console for details.");
+            playSound('error');
+        } finally {
+            // Restore UI State
+            activeBtn.textContent = originalBtnText;
+            activeBtn.disabled = false;
+            document.body.style.cursor = "default";
+        }
+    }
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        generateLore(false);
+    });
+
+    retryBtn.addEventListener("click", () => {
+        generateLore(true);
+    });
+
+    // ==========================================
+    // RENDER OUTPUT DATA
+    // ==========================================
+    function renderLoreWindow(data) {
+        outName.textContent = data.name || "Unknown";
+        outClass.textContent = data.class || "Unknown";
+        outGender.textContent = data.gender || "Unknown";
+        outLocation.textContent = data.place_of_birth || "Unknown";
+        
+        outRole.textContent = data.role || "No role provided.";
+        outDesc.textContent = data.description || "No description provided.";
+        
+        outAct1.textContent = data.act_1 || "";
+        outAct2.textContent = data.act_2 || "";
+        outAct3.textContent = data.act_3 || "";
+        outAct4.textContent = data.act_4 || "";
+        
+        // Format metadata JSON nicely
+        try {
+            const metaObj = typeof data.metadata === 'string' ? JSON.parse(data.metadata) : data.metadata;
+            outMetadata.textContent = JSON.stringify(metaObj, null, 2);
+        } catch (e) {
+            outMetadata.textContent = data.metadata || "{}";
+        }
+    }
+
+    // ==========================================
+    // PDF GENERATION (API Call)
+    // ==========================================
+    pdfBtn.addEventListener("click", async () => {
+        if (!currentLoreData) return;
+        playSound('click');
+
+        pdfBtn.textContent = "Scribing Parchment...";
+        pdfBtn.disabled = true;
+
+        try {
+            const response = await fetch('/api/generate-pdf', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(currentLoreData)
+            });
+
+            if (!response.ok) throw new Error("Failed to generate PDF");
+
+            // Handle file download
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            
+            // Extract filename from headers if possible, or fallback
+            const contentDisposition = response.headers.get('Content-Disposition');
+            let filename = `${currentLoreData.name || 'Character'}_Lore.pdf`;
+            if (contentDisposition && contentDisposition.includes('filename=')) {
+                filename = contentDisposition.split('filename=')[1].replace(/"/g, '');
+            }
+
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            a.remove();
+            
+            playSound('success');
+        } catch (error) {
+            console.error("Error downloading PDF:", error);
+            alert("Failed to scribe the PDF document.");
+            playSound('error');
+        } finally {
+            pdfBtn.textContent = "Save as PDF";
+            pdfBtn.disabled = false;
+        }
+    });
+
+    // ==========================================
+    // NAVIGATION
+    // ==========================================
+    backBtn.addEventListener("click", () => {
+        playSound('click');
+        loreWindow.classList.add("hidden");
+        setupWindow.classList.remove("hidden");
+        
+        // Optional: scroll to top
+        document.querySelector('.desktop-environment').scrollTop = 0;
+    });
+
+    // Initialize the app on load
+    loadOptions();
+});

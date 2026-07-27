@@ -1,0 +1,376 @@
+/* =========================================
+   VARIABLES & THEME SETTINGS
+========================================= */
+:root {
+    /* RO Classic UI Colors */
+    --ro-window-bg: rgba(240, 244, 248, 0.85); /* Delicate glassy white/blue */
+    --ro-title-bg: rgba(174, 198, 207, 0.95); /* Pastel light blue */
+    --ro-title-text: #2c3e50;
+    --ro-border-light: #ffffff;
+    --ro-border-dark: #a0b0c0;
+    --ro-text-main: #333333;
+    
+    /* Parchment Journal Colors */
+    --parchment-bg: #f4e7c3;
+    --parchment-border: #d4c098;
+    --parchment-text: #4a3c31;
+    --parchment-shadow: rgba(139, 115, 85, 0.15);
+
+    /* Typography */
+    --font-pixel-heading: 'Silkscreen', cursive;
+    --font-pixel-ui: 'Press Start 2P', cursive;
+    --font-body: 'Outfit', sans-serif;
+}
+
+/* =========================================
+   GLOBAL RESET & ENVIRONMENT
+========================================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    font-family: var(--font-body);
+    color: var(--ro-text-main);
+    overflow: hidden; /* Desktop-like environment */
+}
+
+/* Dark mode Prontera ambient background with glassmorphism */
+.ambient-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    /* Placeholder for the Prontera wallpaper asset */
+    background: linear-gradient(135deg, #838383, #9a9a9a), url('../assets/x3vo3Wm-ragnarok-online-wallpaper.jpg') center/cover no-repeat;
+    background-blend-mode: overlay;
+    opacity: 70%;
+    z-index: -1;
+}
+
+.desktop-environment {
+    width: 100%;
+    height: 100%;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
+    backdrop-filter: blur(2px); /* Smooth glassmorphism over background */
+    overflow-y: auto;
+}
+
+/* Utility Class */
+.hidden {
+    display: none !important;
+}
+
+/* =========================================
+   RO WINDOW SYSTEM (Generic)
+========================================= */
+.ro-window {
+    background: var(--ro-window-bg);
+    border-top: 2px solid var(--ro-border-light);
+    border-left: 2px solid var(--ro-border-light);
+    border-right: 2px solid var(--ro-border-dark);
+    border-bottom: 2px solid var(--ro-border-dark);
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    max-width: 500px;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+}
+
+#lore-window {
+    max-width: 700px;
+}
+
+/* Title Bar */
+.ro-title-bar {
+    background: var(--ro-title-bg);
+    padding: 6px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--ro-border-dark);
+    user-select: none;
+    cursor: default;
+}
+
+.title-text {
+    font-family: var(--font-pixel-heading);
+    font-size: 0.85rem;
+    color: var(--ro-title-text);
+    letter-spacing: 1px;
+}
+
+.ro-close-btn {
+    background: none;
+    border: none;
+    font-family: var(--font-pixel-ui);
+    font-size: 0.5rem;
+    color: var(--ro-title-text);
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.ro-close-btn:hover {
+    opacity: 1;
+}
+
+.ro-window-content {
+    padding: 1.5rem;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+/* =========================================
+   FORM LAYOUT (Alt+A Style)
+========================================= */
+.setup-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.sprite-container {
+    display: flex;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px inset var(--ro-border-dark);
+    padding: 1rem;
+    border-radius: 4px;
+}
+
+.sprite-preview {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.sprite-placeholder {
+    font-family: var(--font-pixel-ui);
+    font-size: 0.6rem;
+    color: #888;
+    line-height: 1.5;
+}
+
+.ro-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #445566;
+}
+
+.req {
+    color: #d9534f;
+}
+
+.form-group input, 
+.form-group select, 
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    border: 1px solid var(--ro-border-dark);
+    background: #ffffff;
+    border-radius: 2px;
+    color: #333;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus, 
+.form-group select:focus, 
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--ro-title-bg);
+    box-shadow: 0 0 0 2px rgba(174, 198, 207, 0.3);
+}
+
+/* =========================================
+   BUTTONS
+========================================= */
+.ro-btn-primary, .ro-btn-secondary {
+    font-family: var(--font-pixel-heading);
+    font-size: 0.8rem;
+    padding: 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 2px;
+    border-top: 2px solid rgba(255, 255, 255, 0.8);
+    border-left: 2px solid rgba(255, 255, 255, 0.8);
+    border-right: 2px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+    transition: all 0.1s;
+}
+
+.ro-btn-primary {
+    background: var(--ro-title-bg);
+    color: var(--ro-title-text);
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.ro-btn-secondary {
+    background: #e0e6ed;
+    color: #555;
+}
+
+.ro-btn-primary:active, .ro-btn-secondary:active {
+    border-top: 2px solid rgba(0, 0, 0, 0.2);
+    border-left: 2px solid rgba(0, 0, 0, 0.2);
+    border-right: 2px solid rgba(255, 255, 255, 0.8);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+.ro-btn-primary:disabled {
+    background: #ccc;
+    color: #888;
+    cursor: not-allowed;
+}
+
+/* =========================================
+   PARCHMENT JOURNAL (Lore Output)
+========================================= */
+.parchment-scroll {
+    background-color: var(--parchment-bg);
+    /* Subtle parchment texture overlay if available */
+    background-image: radial-gradient(var(--parchment-shadow) 1px, transparent 1px);
+    background-size: 20px 20px;
+    border: 1px inset var(--parchment-border);
+    color: var(--parchment-text);
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    background: rgba(255, 255, 255, 0.4);
+    padding: 1rem;
+    border: 1px solid var(--parchment-border);
+}
+
+.metric-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.metric-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.7;
+}
+
+.metric-value {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.ro-heading {
+    font-family: var(--font-pixel-heading);
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #3e2723;
+    border-bottom: 1px dashed var(--parchment-border);
+    padding-bottom: 4px;
+}
+
+.lore-section {
+    margin-bottom: 1.5rem;
+}
+
+.ro-text {
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.acts-container {
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid var(--parchment-border);
+    padding: 1rem;
+}
+
+.act-block {
+    margin-bottom: 0.75rem;
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
+.act-block:last-child {
+    margin-bottom: 0;
+}
+
+/* Metadata Box */
+.metadata-box {
+    background: #2b2b2b;
+    border: 2px solid #555;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 2px;
+}
+
+.meta-heading {
+    font-family: var(--font-pixel-ui);
+    font-size: 0.55rem;
+    color: #a5d6a7;
+    margin-bottom: 0.5rem;
+}
+
+.metadata-box pre {
+    font-family: monospace;
+    font-size: 0.8rem;
+    color: #e0e0e0;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+/* Action Buttons Container */
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.action-buttons button {
+    flex: 1;
+    margin-top: 0;
+}
+
+/* Custom Scrollbar for inner windows */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: var(--ro-border-dark);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--ro-title-bg);
+    border: 1px solid var(--ro-border-light);
+}
