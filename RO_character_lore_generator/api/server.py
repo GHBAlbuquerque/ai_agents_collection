@@ -1,11 +1,13 @@
 # 🆕 FastAPI server (exposes your python functions via HTTP)
+import os
+import logging
 from fastapi import FastAPI, HTTPException, Response
 from fastapi.middleware.cors import CORSMiddleware
 from core.properties import ALIGNMENT_OPTIONS, CLASSES_OPTIONS, GENDER_OPTIONS, LOCATIONS_OPTIONS
 from api.models import CharacterLoreCreationRequest, CharacterLoreCreationData
 from core.agent import get_character_lore
 from core.output_file_generator import create_pdf_from_string, format_lore_data_to_text
-
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI(
     title="RO Character Lore Generator",
@@ -27,10 +29,6 @@ app.add_middleware(
 # ===================
 # ENDPOINTS
 # ===================
-
-@app.get("/")
-def read_root():
-    return {"message": "Character Lore Generator API is running!"}
 
 # GET /api/options
 @app.get("/api/options",
@@ -81,3 +79,9 @@ async def generate_pdf(request: CharacterLoreCreationData):
             status_code=500,
             detail=f"Error trying to generate PDF: {str(e)}"
         )
+        
+web_dir = os.path.abspath(os.path.join(os.path.dirname(os.path.dirname(__file__)), "web"))
+if os.path.exists(web_dir):
+    app.mount("/", StaticFiles(directory=web_dir, html=True), name="static")
+else:
+    logging.warning(f"Web directory not found at {web_dir}")
