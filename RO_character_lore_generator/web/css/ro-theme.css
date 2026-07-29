@@ -76,7 +76,7 @@ a {
 }
 
 /* =========================================
-   APP OVERLAY TITLE
+   APP OVERLAY TITLE (RESPONSIVE UPDATE)
 ========================================= */
 .app-header-container {
     position: absolute;
@@ -118,6 +118,59 @@ a {
     z-index: 100;
 }
 
+
+/* =========================================
+   MOBILE & SMALL SCREEN RESPONSIVENESS
+========================================= */
+@media (max-width: 900px) {
+    body, html {
+        overflow-y: auto;
+    }
+
+    .desktop-environment {
+        flex-direction: column;
+        align-items: center;
+        padding: 1.5rem;
+        padding-top: 2rem; 
+        gap: 1.5rem;
+    }
+
+    .app-header-container {
+        position: relative;
+        top: auto;
+        left: auto;
+        right: auto;
+        width: 100%; 
+        align-items: center; 
+        text-align: center;
+        max-width: 100%;
+        margin-bottom: 2rem;
+        margin-top: 30px;
+    }
+
+    .app-title {
+        width: 100%;
+        text-align: center;
+        font-size: 1rem; /* Slightly scaled down so long titles wrap nicely */
+        padding: 0 1rem;
+    }
+
+    .app-subtitle {
+        width: 100%;
+        max-width: 100%;
+        flex-direction: column; 
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        gap: 8px;
+        margin-top: 14px;
+    }
+
+    .poring-sprite {
+        height: 45px;
+        width: 45px;
+    }
+}
 
 
 /* =========================================
