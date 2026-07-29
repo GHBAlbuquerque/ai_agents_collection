@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RO Character Lore Generator</title>
+    <!-- Google Fonts for Retro Pixel & Delicate Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Press+Start+2P&family=Silkscreen&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/assets/sprites/poring.png">
+    <!-- Custom RO Theme -->
+    <link rel="stylesheet" href="css/ro-theme.css">
+</head>
+<body>
+    <!-- Light ambient Prontera background -->
+    <div class="ambient-background"></div>
+
+
+    <header class="app-header-container">
+    <h1 class="app-title">Ragnarok Online: Character Lore Generator</h1>
+    
+    <div class="app-subtitle">
+            <img src="assets/sprites/poring.png" alt="Poring" class="poring-sprite">
+       <span>Made with love by <a href="https://github.com/GHBAlbuquerque" target="_blank">@GHBAlbuquerque</a></span>
+
+    </div>
+    </header>
+
+    <main class="desktop-environment">
+        
+        <!-- ==========================================
+             WINDOW 1: Character Setup (Alt+A Style)
+        =========================================== -->
+        <div class="ro-window" id="setup-window">
+            <div class="ro-title-bar">
+                <span class="title-text">Character Setup</span>
+                <button class="ro-close-btn" aria-label="Close">_ X</button>
+            </div>
+            
+            <div class="ro-window-content">
+                <div class="setup-layout">
+                    
+                    <!-- Sprite Preview Area -->
+                    <div class="sprite-container">
+                        <div class="sprite-preview" id="sprite-preview">
+                            <!-- Image will be injected via JS -->
+                            <p class="sprite-placeholder">No Class<br>Selected</p>
+                        </div>
+                    </div>
+
+                    <!-- Form Inputs -->
+                    <form id="lore-form" class="ro-form">
+                        <div class="form-group">
+                            <label for="char-name">Character Name</label>
+                            <input type="text" id="char-name" placeholder="Leave blank for random..." maxlength="200">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="char-class">Class <span class="req">*</span></label>
+                                <select id="char-class" required>
+                                    <option value="" disabled selected>Select Class</option>
+                                    <option value="Novice">Novice</option>
+                                    <option value="Swordsman">Swordsman</option>
+                                    <option value="Mage">Mage</option>
+                                    <option value="Archer">Archer</option>
+                                    <option value="Acolyte">Acolyte</option>
+                                    <option value="Thief">Thief</option>
+                                    <option value="Merchant">Merchant</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="char-gender">Gender <span class="req">*</span></label>
+                                <select id="char-gender" required>
+                                    <option value="" disabled selected>Select Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="char-location">Birth Location</label>
+                                <select id="char-location">
+                                    <option value="" selected>Any Location</option>
+                                    <option value="Prontera">Prontera</option>
+                                    <option value="Geffen">Geffen</option>
+                                    <option value="Payon">Payon</option>
+                                    <option value="Morroc">Morroc</option>
+                                    <option value="Alberta">Alberta</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="char-age">Age</label>
+                                <input type="number" id="char-age" placeholder="e.g. 18">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="char-alignment">Alignment</label>
+                            <select id="char-alignment">
+                                <option value="" selected>Any Alignment</option>
+                                <option value="Lawful Good">Lawful Good</option>
+                                <option value="Chaotic Good">Chaotic Good</option>
+                                <option value="True Neutral">True Neutral</option>
+                                <option value="Lawful Evil">Lawful Evil</option>
+                                <option value="Chaotic Evil">Chaotic Evil</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="char-desc">Brief Description</label>
+                            <textarea id="char-desc" rows="3" placeholder="A wandering merchant seeking rare artifacts..." maxlength=2000></textarea>
+                        </div>
+
+                        <button type="submit" class="ro-btn-primary" id="generate-btn">Generate Lore</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             WINDOW 2: Lore Output (Quest Journal)
+        =========================================== -->
+        <div class="ro-window hidden" id="lore-window">
+            <div class="ro-title-bar">
+                <span class="title-text">Quest Journal: Destiny Unveiled</span>
+                <button class="ro-close-btn" aria-label="Close">_ X</button>
+            </div>
+            
+            <div class="ro-window-content parchment-scroll">
+                
+                <!-- Character Metrics Grid -->
+                <div class="metrics-grid">
+                    <div class="metric-box">
+                        <span class="metric-label">Name</span>
+                        <span class="metric-value" id="out-name">Unknown</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="metric-label">Class</span>
+                        <span class="metric-value" id="out-class">Unknown</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="metric-label">Gender</span>
+                        <span class="metric-value" id="out-gender">Unknown</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="metric-label">Birthplace</span>
+                        <span class="metric-value" id="out-location">Unknown</span>
+                    </div>
+                </div>
+
+                <div class="lore-section">
+                    <h3 class="ro-heading">Role</h3>
+                    <p id="out-role" class="ro-text"></p>
+                </div>
+
+                <div class="lore-section">
+                    <h3 class="ro-heading">Detailed Description</h3>
+                    <p id="out-desc" class="ro-text"></p>
+                </div>
+
+                <!-- Acts Scroll -->
+                <div class="lore-section acts-container">
+                    <h3 class="ro-heading">📖 Character Acts</h3>
+                    <div class="act-block">
+                        <strong>Act I:</strong> <span id="out-act1"></span>
+                    </div>
+                    <div class="act-block">
+                        <strong>Act II:</strong> <span id="out-act2"></span>
+                    </div>
+                    <div class="act-block">
+                        <strong>Act III:</strong> <span id="out-act3"></span>
+                    </div>
+                    <div class="act-block">
+                        <strong>Act IV:</strong> <span id="out-act4"></span>
+                    </div>
+                </div>
+
+                <!-- Destiny Roll / Metadata -->
+                <div class="metadata-box">
+                    <h4 class="meta-heading">Destiny Metadata Roll</h4>
+                    <pre id="out-metadata">{"status": "waiting"}</pre>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="ro-btn-secondary" id="back-btn">← Back to Setup</button>
+                    <button class="ro-btn-primary" id="pdf-btn">Save as PDF</button>
+                    <button class="ro-btn-primary" id="retry-btn">Re-Roll Destiny</button>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- JS will be linked here -->
+    <script src="js/app.js"></script>
+</body>
+</html>
