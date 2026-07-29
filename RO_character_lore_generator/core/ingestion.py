@@ -18,6 +18,7 @@ def create_documents():
     documents = []
     
     for file in FILES_FOLDER.glob('*.pdf'):
+        print(f"Reading file: {file.name}")
         reader = PdfReader(file)
         
         file_pages = [Document(page_content=page.extract_text(), 
@@ -66,11 +67,18 @@ def initialize_vector_store(documents: list[Document]) -> Chroma:
 
 @st.cache_resource
 def create_retriever() -> VectorStoreRetriever:
-    docs = create_documents()
-    split_docs = split_documents(docs)
-    vector_store = initialize_vector_store(split_docs)
-    
-    return vector_store.as_retriever(
-        search_kwargs = {"k":2, "fetch_k":10},
-        search_type="mmr"
-    )
+    try:
+        docs = create_documents()
+        split_docs = split_documents(docs)
+        vector_store = initialize_vector_store(split_docs)
+        
+        return vector_store.as_retriever(
+        search_kwargs={"k": 4},
+        search_type="similarity"
+        )
+    except Exception as e:
+        print(e)
+        return vector_store.as_retriever(
+            search_kwargs = {"k":4, "fetch_k":20},
+            search_type="mmr"
+        )

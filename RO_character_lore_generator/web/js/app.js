@@ -180,6 +180,8 @@ document.addEventListener("DOMContentLoaded", () => {
             setupWindow.classList.add("hidden");
             loreWindow.classList.remove("hidden");
 
+            document.querySelector('.parchment-scroll').scrollTop = 0;
+
         } catch (error) {
             console.error("Error generating lore:", error);
             showToast("The Server-side spell failed to cast. Check the console for details.");
