@@ -11,7 +11,7 @@ wheels/
 .env
 
 # DB folder
-/vector_db/*
+core/vector_db/*
 
 # outputs folder
 /outputs/*

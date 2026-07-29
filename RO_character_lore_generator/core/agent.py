@@ -30,7 +30,7 @@ def format_docs_output(documents: list[Document]):
 # -------------------- // --------------------
 # 2. Config Chat Chain
 
-MODEL = ChatOpenAI(model=MODEL_NAME)
+MODEL = ChatOpenAI(model=MODEL_NAME, temperature=0.5)
 PARSER = StrOutputParser()
 
 def config_lore_chain(retriever: VectorStoreRetriever) -> RunnableSerializable[Any, str]:

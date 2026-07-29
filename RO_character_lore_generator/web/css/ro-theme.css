@@ -70,34 +70,52 @@ body, html {
     display: none !important;
 }
 
+a {
+    color: inherit;        
+    text-decoration: none; 
+}
+
 /* =========================================
    APP OVERLAY TITLE
 ========================================= */
-.app-title {
-    position: fixed;
-    top: 32px;
-    left: 32px;
-    z-index: 9999; /* Forces it above the glassmorphism backdrop */
-    pointer-events: none;
-    
-    /* Typography constraints */
+.app-header-container {
+    position: absolute;
+    top: 30px;  
+    left: 30px; 
+    z-index: 100;
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start;
     font-family: var(--font-pixel-ui);
+    max-width: 400px;
+    line-height: 1.5;
+}
+
+.app-title {
+    margin: 0;
+    font-size: 1.2rem; 
     color: #ffffff;
-    font-size: 0.75rem; /* Scaled down to prevent overlapping the central windows */
-    line-height: 1.6;
-    max-width: 250px; /* Forces the text to wrap neatly in the corner */
-    
-    /* Perfect 8-way solid pixel stroke + classic drop shadow */
-    text-shadow: 
-        1px 1px 0 #575757,
-       -1px 1px 0 #575757,
-        1px -1px 0 #575757,
-       -1px -1px 0 #575757,
-        0px 1px 0 #575757,
-        0px -1px 0 #575757,
-       -1px 0px 0 #575757,
-        1px 0px 0 #575757,
-        3px 3px 0 rgba(0,0,0,0.6); 
+    text-shadow: 2px 2px 0px #4b6375;
+}
+
+.app-subtitle {
+    max-width: 260px;
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    gap: 10px; 
+    margin-top: 10px; 
+    z-index: 100;
+    font-size: 0.7rem; 
+    color: #ffffff;
+    text-shadow: 2px 2px 0px #6a8aa3;
+}
+
+.poring-sprite {
+    height: 50px; 
+    width: 50px;
+    image-rendering: pixelated;
+    z-index: 100;
 }
 
 

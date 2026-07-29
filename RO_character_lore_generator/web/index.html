@@ -15,7 +15,16 @@
     <!-- Light ambient Prontera background -->
     <div class="ambient-background"></div>
 
+
+    <header class="app-header-container">
     <h1 class="app-title">Ragnarok Online: Character Lore Generator</h1>
+    
+    <div class="app-subtitle">
+            <img src="assets/sprites/poring.png" alt="Poring" class="poring-sprite">
+       <span>Made with love by <a href="https://github.com/GHBAlbuquerque" target="_blank">@GHBAlbuquerque</a></span>
+
+    </div>
+    </header>
 
     <main class="desktop-environment">
         
@@ -104,7 +113,7 @@
 
                         <div class="form-group">
                             <label for="char-desc">Brief Description</label>
-                            <textarea id="char-desc" rows="3" placeholder="A wandering merchant seeking rare artifacts..."></textarea>
+                            <textarea id="char-desc" rows="3" placeholder="A wandering merchant seeking rare artifacts..." maxlength=2000></textarea>
                         </div>
 
                         <button type="submit" class="ro-btn-primary" id="generate-btn">Generate Lore</button>
