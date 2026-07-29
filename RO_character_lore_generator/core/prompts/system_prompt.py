@@ -22,6 +22,12 @@ Your task is to generate a detailed Ragnarok Online character sheet based on the
 - Character Alignment: (Optional - if given, should be one of: Lawful/Neutral/Chaotic + Good/Neutral/Evil)
 - Brief Description: (Optional)
 
+# 🔍 Retrieved World Context (RAG Data)
+You MUST integrate the specific lore, locations, monsters, or events provided in the context below into the character's background, catalyst, or journey:
+--- START CONTEXT ---
+{{context}}
+--- END CONTEXT ---
+
 Below is the Lore Repository detailing the strict formatting, narrative structure, and few-shot examples you MUST follow:
 --- START LORE REPOSITORY ---
 {static_lore_examples}
@@ -71,7 +77,4 @@ Role: [Briefly describe their role in the overall plot]
 Detailed Description: [Write between 300 and 500 characters focusing on appearance, seamlessly integrating the exact class attire guidelines]
 Character Lore: [Write between 500 and 1500 characters strictly following the four-act narrative structure]
 Metadata: [A dictionary with the fields 'alignment' and 'destiny' of the character]
-
-Context:
-{{context}}
 """
