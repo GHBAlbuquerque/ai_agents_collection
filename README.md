@@ -11,6 +11,8 @@ As this collection grows, each project is isolated in its own directory with its
 2. [media_content_generator_agent](https://github.com/GHBAlbuquerque/ai_agents_collection/tree/main/media_content_generator_agent): An AI-powered research and content ideation engine that automates video audio extraction, transcribes clips via Groq Whisper, and leverages an Agno Agent to brainstorm tailored content scripts.
 3. [film_pro_movie_curator_agent](https://github.com/GHBAlbuquerque/ai_agents_collection/tree/main/film_pro_movie_curator_agent): An AI-powered movie curation and recommendation system that utilizes an autonomous agent built with Agno to analyze user preferences, search the web via DuckDuckGo, and fetch accurate movie data from the OMDb API to deliver highly personalized movie recommendations.
 4. [chat_pdf](https://github.com/GHBAlbuquerque/ai_agents_collection/tree/main/chat_pdf): An intelligent PDF document analyzer with an interactive web interface for PDF upload and conversational document understanding.
+5. [RO_character_lore_generator](https://github.com/GHBAlbuquerque/ai_agents_collection/tree/main/RO_character_lore_generator): A small AI-powered project that generates Ragnarok Online-style character lore and printable character sheets.
+
 
 *(More projects will be added here as the collection expands!)*
 

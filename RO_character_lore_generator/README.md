@@ -134,3 +134,6 @@ Acknowledgements
 
 Contact / Support
 - Open an issue in this repository with details (steps to reproduce, logs, env vars) if you run into problems.
+
+---
+Developed with ❤️ by @GHBAlbuquerque
