@@ -7,7 +7,7 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 def create_pdf_from_string(generated_lore: str) -> bytes:
     """
     Takes the generated lore text/data, builds a PDF in-memory, 
-    and returns the raw bytes for Streamlit's download button.
+    and returns the raw bytes for download button.
     """
     buffer = io.BytesIO()
     
