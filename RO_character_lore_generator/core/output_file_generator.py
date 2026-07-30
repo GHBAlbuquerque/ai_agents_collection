@@ -1,5 +1,6 @@
 import io
 import os
+import logging
 from core.properties import OUTPUT_FOLDER
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
@@ -50,8 +51,8 @@ def create_pdf_from_string(generated_lore: str) -> bytes:
 
 
 def save_txt_to_system(generated_lore: str, file_name: str):
-    # Skip saving if running on Vercel
-    if os.environ.get("VERCEL"):
+    if os.environ.get("ENVIRONMENT") == "prod":
+        logging.info("Skipping local system file save.")
         return
     
     file_name = file_name + ".txt"
