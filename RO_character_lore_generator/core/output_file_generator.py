@@ -1,4 +1,5 @@
 import io
+import os
 from core.properties import OUTPUT_FOLDER
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
@@ -48,12 +49,15 @@ def create_pdf_from_string(generated_lore: str) -> bytes:
     return pdf_bytes
 
 
-def save_txt_to_system(generated_lore: str, file_name:str):
+def save_txt_to_system(generated_lore: str, file_name: str):
+    # Skip saving if running on Vercel
+    if os.environ.get("VERCEL"):
+        return
+    
     file_name = file_name + ".txt"
     txt_path = OUTPUT_FOLDER / file_name
     
     OUTPUT_FOLDER.mkdir(parents=True, exist_ok=True)
-
     txt_path.write_text(generated_lore, encoding="utf-8")
 
 
