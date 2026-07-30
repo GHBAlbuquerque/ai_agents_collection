@@ -24,24 +24,24 @@ Quick start
    cd ai_agents_collection/RO_character_lore_generator
    ```
 
-2. Create and activate a virtual environment
+2. Setup Environment and Install Dependencies
+   **Option A: Using `uv` (Recommended)**
+   `uv` handles both virtual environment creation and dependency installation in a single step.
    ```bash
-   python -m venv .venv
+   uv sync
    source .venv/bin/activate   # macOS / Linux
    .venv\Scripts\activate      # Windows (PowerShell)
    ```
 
-3. Install dependencies
-   - This project uses a `pyproject.toml`. Install with pip or poetry:
+   **Option B: Using standard Python (`venv` + `pip`)**
    ```bash
-   # If using pip and a requirements file is available:
-   pip install -r requirements.txt
-
-   # OR using poetry (if you prefer):
-   poetry install
+   python -m venv .venv
+   source .venv/bin/activate   # macOS / Linux
+   .venv\Scripts\activate      # Windows (PowerShell)
+   pip install .
    ```
 
-4. Configure environment variables
+3. Configure environment variables
    Create a `.env` file in the project directory (or export env vars). Common variables used:
    ```
    OPENAI_API_KEY=your_openai_api_key
@@ -50,7 +50,7 @@ Quick start
    PORT=8000
    ```
 
-5. Start the server
+4. Start the server
    The repository includes a FastAPI server. Two common ways to run it:
    ```bash
    # If the project provides a main entry
@@ -60,7 +60,7 @@ Quick start
    uvicorn server:app --reload --host 0.0.0.0 --port 8000
    ```
 
-6. Open the web UI
+5. Open the web UI
    - After starting the server, open:
      http://127.0.0.1:8000/
    - The `web/` folder contains a Ragnarok Online-themed UI (`index.html`, CSS, JS, sprites). The UI interacts with the server endpoints to submit character form data and show generated lore, sprites, and PDF export options.
