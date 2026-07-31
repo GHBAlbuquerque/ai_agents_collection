@@ -1,4 +1,5 @@
 import random
+import logging
 from langchain_openai import ChatOpenAI
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.vectorstores import VectorStoreRetriever
@@ -48,6 +49,8 @@ def config_lore_chain(retriever: VectorStoreRetriever) -> RunnableSerializable[A
             prompt | 
             MODEL | 
             PARSER)
+    
+    logging.info("Successfully created chain.")
     
     return chain
 

@@ -1,4 +1,6 @@
 
+import os
+import logging
 from pypdf import PdfReader
 from langchain_core.documents import Document
 from langchain_core.vectorstores import VectorStoreRetriever
@@ -17,7 +19,7 @@ def create_documents():
     documents = []
     
     for file in FILES_FOLDER.glob('*.pdf'):
-        print(f"Reading file: {file.name}")
+        logging.info(f"Reading file: {file.name}")
         reader = PdfReader(file)
         
         file_pages = [Document(page_content=page.extract_text(), 
@@ -26,7 +28,7 @@ def create_documents():
         
         documents.extend(file_pages)
         
-    print(f'Loaded documents: {len(documents)}')
+    logging.info(f'Loaded documents: {len(documents)}')
     return documents
 
 # -------------------- // --------------------
@@ -36,7 +38,7 @@ def split_documents(documents : list[Document]) -> list[Document]:
     splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100, length_function=len)
     
     chunks = splitter.split_documents(documents=documents)
-    print(f"Created chunks: {len(chunks)}")
+    logging.info(f"Created chunks: {len(chunks)}")
     for i, chunk in enumerate(chunks):
         chunk.metadata['source'] = chunk.metadata['source'].split('/')
         chunk.metadata['id'] = i
@@ -47,19 +49,32 @@ def split_documents(documents : list[Document]) -> list[Document]:
 # 3. Create Vector Store (Chroma)
 
 def initialize_vector_store(documents: list[Document]) -> Chroma:
-    embeddings = OpenAIEmbeddings(model=EMBEDDING_MODEL)
-    vector_store = Chroma(persist_directory=str(VECTOR_DB_FOLDER),
-                          embedding_function=embeddings,
-                         collection_name=COLLECTION_NAME)
-    
-    if vector_store._collection.count() > 0:
-        print("Data is already loaded.")
-    else:
-        print("Collection is empty. Generating embbedings...")
-        vector_store.add_documents(documents=documents)
+    try:
+        embeddings = OpenAIEmbeddings(model=EMBEDDING_MODEL)
         
-    print("Succesfully initilialized Chroma vector store.")
-    return vector_store
+        if os.environ.get("ENVIRONMENT") == "prod":
+            db_directory = "/tmp/vector_db"
+        else:
+            db_directory = str(VECTOR_DB_FOLDER)
+
+        vector_store = Chroma(
+            persist_directory=db_directory,
+            embedding_function=embeddings,
+            collection_name=COLLECTION_NAME
+        )
+        
+        if vector_store._collection.count() > 0:
+            logging.info("Data is already loaded in vector store.")
+        else:
+            logging.info("Collection is empty. Generating embeddings...")
+            vector_store.add_documents(documents=documents)
+            
+        logging.info("Successfully initialized Chroma vector store.")
+        return vector_store
+    
+    except Exception as e:
+        logging.error(f"Failure initializing vector store: {e}")
+        raise e
 
 # -------------------- // --------------------
 # 4. Create Retriever
@@ -71,12 +86,9 @@ def create_retriever() -> VectorStoreRetriever:
         vector_store = initialize_vector_store(split_docs)
         
         return vector_store.as_retriever(
-        search_kwargs={"k": 4},
-        search_type="similarity"
+            search_kwargs={"k": 4},
+            search_type="similarity"
         )
     except Exception as e:
-        print(e)
-        return vector_store.as_retriever(
-            search_kwargs = {"k":4, "fetch_k":20},
-            search_type="mmr"
-        )
+        logging.error(f"Error initializing vector store retriever: {e}", exc_info=True)
+        raise e
