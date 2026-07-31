@@ -54,7 +54,7 @@ async def get_options():
     response_model=CharacterLoreCreationData)
 async def generate_lore(request: CharacterLoreCreationRequest):
     try:
-        logger.info(f"Generating lore for request: {request.name}")
+        logger.info(f"Generating lore for request: {request.character_name}")
         return get_character_lore(request)
     except Exception as e:
         logger.error(f"Error generating lore: {str(e)}", exc_info=True)
