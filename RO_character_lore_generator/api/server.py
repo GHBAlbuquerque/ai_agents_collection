@@ -9,6 +9,9 @@ from core.agent import get_character_lore
 from core.output_file_generator import create_pdf_from_string, format_lore_data_to_text
 from fastapi.staticfiles import StaticFiles
 
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger("api.server")
+
 app = FastAPI(
     title="RO Character Lore Generator",
     description="Generate character lore for Ragnarok Online characters using AI.",
@@ -51,8 +54,10 @@ async def get_options():
     response_model=CharacterLoreCreationData)
 async def generate_lore(request: CharacterLoreCreationRequest):
     try:
+        logger.info(f"Generating lore for request: {request.character_name}")
         return get_character_lore(request)
     except Exception as e:
+        logger.error(f"Error generating lore: {str(e)}", exc_info=True)
         raise HTTPException(
             status_code=500,
             detail=f"Error trying to generate lore: {str(e)}"

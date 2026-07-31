@@ -229,8 +229,8 @@ a {
 
 .ro-window-content {
     padding: 1.5rem;
-    max-height: 100vh;
-    overflow-y: auto;
+    /*max-height: 100vh;
+    overflow-y: auto;*/
 }
 
 /* =========================================

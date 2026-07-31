@@ -76,7 +76,7 @@ Usage
     - POST /generate (or similar): send character parameters and receive generated lore and structured metadata.
     - GET /sprites/{class}/{gender}: fetch sprite assets.
     - POST /export/pdf: request a generated PDF character sheet.
-  - Note: endpoint names may vary depending on `server.py` implementation — check the server file for exact routes.
+  - Note: endpoint names may vary depending on `server.py` implementation - check the server file for exact routes.
 
 Project layout
 ```
@@ -112,9 +112,9 @@ Testing and debugging
 - If the UI cannot load sprites or endpoints, verify the server is serving the `web/` directory and the endpoints expected by `web/js/app.js` exist.
 
 Common environment variables (summary)
-- OPENAI_API_KEY — required for model calls.
-- VECTOR_DB_PATH — path to vector DB files (default: ./vector_db).
-- HOST, PORT — host and port for the FastAPI server.
+- OPENAI_API_KEY - required for model calls.
+- VECTOR_DB_PATH - path to vector DB files (default: ./vector_db).
+- HOST, PORT - host and port for the FastAPI server.
 
 Contributing
 - Fork the repository and create feature branches.
@@ -125,9 +125,9 @@ License
 - This repository does not include a license file by default. Add a LICENSE file in the repository root if you want to make licensing explicit (MIT, Apache-2.0, etc.).
 
 Troubleshooting hints
-- "No API key provided" — verify .env is loaded or env var is exported.
-- "Vector DB not found" — set `VECTOR_DB_PATH` to correct folder or regenerate DB.
-- Server errors with missing imports — ensure you installed dependencies from `pyproject.toml`.
+- "No API key provided" - verify .env is loaded or env var is exported.
+- "Vector DB not found" - set `VECTOR_DB_PATH` to correct folder or regenerate DB.
+- Server errors with missing imports - ensure you installed dependencies from `pyproject.toml`.
 
 Acknowledgements
 - Ragnarok Online-inspired UI and pixel-art assets are fan works. Respect any original creators' asset licenses if used.
