@@ -20,9 +20,18 @@ load_dotenv()
 # -------------------- // --------------------
 # 1. Auxiliary methods
 
-def get_destiny_roll():
-    roll = random.randint(1,50)
-    return "Special" if roll == 50 else "Standard"
+def get_destiny_roll(age_input: str = "") -> str:
+    if age_input:
+        logging.info(f"Age input: {age_input}")
+        try:
+            if int(age_input) > 300:
+                return "Special"
+        except ValueError:
+            pass 
+
+    roll = random.randint(1, 50)
+    logging.info(f"Destiny Roll: {roll}")
+    return "Special" if roll > 45 else "Standard"
 
 
 def format_docs_output(documents: list[Document]):
@@ -43,7 +52,7 @@ def config_lore_chain(retriever: VectorStoreRetriever) -> RunnableSerializable[A
     
     inputs = {"character_request": lambda character_params: build_human_prompt(character_params),
               "context": lambda _: format_docs_output(retriever.invoke("Ragnarok Online general world lore history and factions")),
-              "destiny_roll": lambda _: get_destiny_roll()}
+              "destiny_roll": lambda character_params: get_destiny_roll(character_params.character_age)}
     
     chain = (RunnableParallel(inputs) | 
             prompt | 
