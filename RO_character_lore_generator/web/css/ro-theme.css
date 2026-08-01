@@ -76,99 +76,121 @@ a {
 }
 
 /* =========================================
-   APP OVERLAY TITLE (RESPONSIVE UPDATE)
+   APP OVERLAY TITLE
 ========================================= */
-.app-header-container {
-    position: absolute;
-    top: 30px;  
-    left: 30px; 
-    z-index: 100;
-    display: flex;
-    flex-direction: column; 
-    align-items: flex-start;
-    font-family: var(--font-pixel-ui);
-    max-width: 400px;
-    line-height: 1.5;
-}
+@media (min-width: 1201px) {
+    .app-header-container {
+        position: absolute;
+        top: 30px;  
+        left: 30px; 
+        z-index: 100;
+        display: flex;
+        flex-direction: column; 
+        align-items: flex-start;
+        font-family: var(--font-pixel-ui);
+        max-width: 400px;
+        line-height: 1.5;
+    }
 
-.app-title {
-    margin: 0;
-    font-size: 1.2rem; 
-    color: #ffffff;
-    text-shadow: 2px 2px 0px #4b6375;
-}
+    .app-title {
+        margin: 0;
+        font-size: 1.2rem; 
+        color: #ffffff;
+        text-shadow: 2px 2px 0px #4b6375;
+    }
 
-.app-subtitle {
-    max-width: 260px;
-    display: flex;
-    align-items: center; 
-    justify-content: center;
-    gap: 10px; 
-    margin-top: 10px; 
-    z-index: 100;
-    font-size: 0.7rem; 
-    color: #ffffff;
-    text-shadow: 2px 2px 0px #6a8aa3;
-}
+    .app-subtitle {
+        max-width: 260px;
+        display: flex;
+        align-items: center; 
+        justify-content: center;
+        gap: 10px; 
+        margin-top: 10px; 
+        z-index: 100;
+        font-size: 0.7rem; 
+        color: #ffffff;
+        text-shadow: 2px 2px 0px #6a8aa3;
+    }
 
-.poring-sprite {
-    height: 40px; 
-    width: 40px;
-    image-rendering: pixelated;
-    z-index: 100;
+    .poring-sprite {
+        height: 40px; 
+        width: 40px;
+        image-rendering: pixelated;
+        z-index: 100;
+    }
 }
-
 
 /* =========================================
    MOBILE & SMALL SCREEN RESPONSIVENESS
 ========================================= */
-@media (max-width: 900px) {
+@media (max-width: 1200px) {
     body, html {
         overflow-y: auto;
+        /* Add these two lines to allow natural scrolling */
+        height: auto;
+        min-height: 100vh; 
     }
 
     .desktop-environment {
         flex-direction: column;
         align-items: center;
-        padding: 1.5rem;
-        padding-top: 2rem; 
-        gap: 1.5rem;
+        padding: 1.5rem 1rem 1rem 1rem;
+        gap: 1rem;
+        justify-content: flex-start; 
+        height: auto;                
+        min-height: 100vh;
+    }
+
+    .ro-window {
+        flex-shrink: 0;
     }
 
     .app-header-container {
         position: relative;
-        top: auto;
-        left: auto;
-        right: auto;
         width: 100%; 
+        display: flex;
+        flex-direction: column;
         align-items: center; 
+        justify-content: center;
         text-align: center;
-        max-width: 100%;
-        margin-bottom: 2rem;
-        margin-top: 30px;
+        font-family: var(--font-pixel-ui);
+        margin-bottom: 0.5rem;
+        flex-shrink: 0;
     }
 
     .app-title {
         width: 100%;
         text-align: center;
-        font-size: 1rem; /* Slightly scaled down so long titles wrap nicely */
-        padding: 0 1rem;
+        font-size: 1rem;
+        color: #ffffff;
+        text-shadow: 2px 2px 0px #4b6375;
+        padding: 0 0.5rem;
+        line-height: 1.4;
     }
 
     .app-subtitle {
         width: 100%;
-        max-width: 100%;
-        flex-direction: column; 
+        display: flex;
+        flex-direction: column;    
         justify-content: center;
         align-items: center;
         text-align: center;
         gap: 8px;
-        margin-top: 14px;
+        margin-top: 8px;
+        font-size: 0.75rem;
+        color: #ffffff;
+        text-shadow: 2px 2px 0px #6a8aa3;
     }
 
     .poring-sprite {
-        height: 45px;
-        width: 45px;
+        height: 32px;
+        width: 32px;
+        image-rendering: pixelated;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 0.75rem;
     }
 }
 
@@ -315,6 +337,12 @@ a {
     outline: none;
     border-color: var(--ro-title-bg);
     box-shadow: 0 0 0 2px rgba(174, 198, 207, 0.3);
+}
+
+#char-desc {
+    resize: vertical;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 /* =========================================

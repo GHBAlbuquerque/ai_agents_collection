@@ -17,17 +17,15 @@
     <div class="ambient-background"></div>
 
 
-    <header class="app-header-container">
-    <h1 class="app-title">Ragnarok Online: Character Lore Generator</h1>
-    
-    <div class="app-subtitle">
-            <img src="assets/sprites/poring.png" alt="Poring" class="poring-sprite">
-       <span>Made with love by <a href="https://github.com/GHBAlbuquerque" target="_blank">@GHBAlbuquerque</a></span>
-
-    </div>
-    </header>
-
     <main class="desktop-environment">
+        <header class="app-header-container">
+            <h1 class="app-title">Ragnarok Online: Character Lore Generator</h1>
+            
+            <div class="app-subtitle">
+                <img src="assets/sprites/poring.png" alt="Poring" class="poring-sprite">
+                <span>Made with love by <a href="https://github.com/GHBAlbuquerque" target="_blank">@GHBAlbuquerque</a></span>
+            </div>
+        </header>
         
         <!-- ==========================================
              WINDOW 1: Character Setup (Alt+A Style)
@@ -53,7 +51,7 @@
                     <form id="lore-form" class="ro-form">
                         <div class="form-group">
                             <label for="char-name">Character Name</label>
-                            <input type="text" id="char-name" placeholder="Leave blank for random..." maxlength="200">
+                            <input type="text" id="char-name" placeholder="Leave blank for random..." maxlength="50">
                         </div>
 
                         <div class="form-row">
@@ -96,7 +94,7 @@
 
                             <div class="form-group">
                                 <label for="char-age">Age</label>
-                                <input type="number" id="char-age" placeholder="e.g. 18">
+                                <input type="number" id="char-age" placeholder="e.g. 18" min="0" max="2000">
                             </div>
                         </div>
 
