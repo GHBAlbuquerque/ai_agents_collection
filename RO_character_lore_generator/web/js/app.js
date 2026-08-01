@@ -41,6 +41,32 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==========================================
     let currentLoreData = null; // Holds the latest generated lore payload for the PDF endpoint
 
+
+    // ==========================================
+    // VALIDATIONS
+    // ==========================================
+
+    const ageInput = document.getElementById('char-age');
+
+    // 1. Prevent typing the minus sign or 'e' (for exponents) entirely
+    ageInput.addEventListener('keydown', function(e) {
+        if (e.key === '-' || e.key === 'e' || e.key === 'E' || e.key === '+' || e.key === '.') {
+            e.preventDefault();
+        }
+    });
+
+    // 2. Clamp the value if they paste in a massive number or try to bypass limits
+    ageInput.addEventListener('input', function() {
+        if (this.value !== '') {
+            // Force it to be an integer
+            let val = parseInt(this.value, 10);
+            
+            // Clamp between 0 and 2000
+            if (val < 0) this.value = 0;
+            if (val > 2000) this.value = 2000;
+        }
+    });
+
     // ==========================================
     // TOAST NOTIFICATION LOGIC
     // ==========================================
