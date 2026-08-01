@@ -31,7 +31,7 @@ def get_destiny_roll(age_input: str = "") -> str:
 
     roll = random.randint(1, 50)
     logging.info(f"Destiny Roll: {roll}")
-    return "Special" if roll > 45 else "Standard"
+    return "Special" if roll > 47 else "Standard"
 
 
 def format_docs_output(documents: list[Document]):

@@ -62,7 +62,8 @@ You MUST ONLY use authentic locations, factions, and lore from the Ragnarok Onli
   - **Sobriquets (Nicknames / Monikers integrated into the name):** ~15% chance
   - **Epithets (Descriptive titles/descriptors attached to the name):** ~10% chance
   DO NOT copy names directly from the Name Repository. Use the repository strictly as a stylistic blueprint to match the linguistic structure, cultural tone, and overall vibe.- All geographic and political references must align accurately with the established world of Midgard. 
-- Characters must be designed to be interesting, diverse, complex, and fundamentally flawed.  
+- Characters must be designed to be interesting, diverse, complex, and fundamentally flawed.
+- If a stealth or support class rolls a "Special - Legendary War Hero" destiny, adapt the archetype creatively (e.g., an Assassin who single-handedly dismantled an entire enemy command structure during a major siege).
 - The overall output must maintain a strong fantasy-RPG inspired atmosphere.
 
 # Destiny Check & Power Scaling:
@@ -79,8 +80,8 @@ Character Name: [Insert Name]
 Character Class: [Insert Class - must be contained in the RO_Classes_Compendium]
 Gender: [Insert Gender]
 Place of Birth: [Insert Birth Location]
+Metadata: [A dictionary with the fields 'alignment' and 'destiny' of the character]
 Role: [Briefly describe their role in the overall plot]
 Detailed Description: [Write between 300 and 500 characters focusing on appearance, seamlessly integrating the exact class attire guidelines]
 Character Lore: [Write between 500 and 1500 characters strictly following the four-act narrative structure]
-Metadata: [A dictionary with the fields 'alignment' and 'destiny' of the character]
 """
