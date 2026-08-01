@@ -3,7 +3,7 @@ from pathlib import Path
 # Config variables
 FILES_FOLDER = Path(__file__).parent / 'files'
 EXAMPLES_FOLDER = Path(__file__).parent / 'examples'
-OUTPUT_FOLDER = Path(__file__).parent / 'outputs'
+OUTPUT_FOLDER = Path(__file__).parent.parent / 'outputs'
 VECTOR_DB_FOLDER = Path(__file__).parent / 'vector_db'
 EMBEDDING_MODEL = "text-embedding-ada-002"
 COLLECTION_NAME = "RO_LORE_COMPEDIUM"

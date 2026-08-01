@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from core.properties import ALIGNMENT_OPTIONS, CLASSES_OPTIONS, GENDER_OPTIONS, LOCATIONS_OPTIONS
 from api.models import CharacterLoreCreationRequest, CharacterLoreCreationData
 from core.agent import get_character_lore
-from core.output_file_generator import create_pdf_from_string, format_lore_data_to_text
+from core.output_file_generator import create_pdf_from_string, format_lore_data_to_text, save_txt_to_system
 from fastapi.staticfiles import StaticFiles
 
 logging.basicConfig(level=logging.INFO)
@@ -55,7 +55,12 @@ async def get_options():
 async def generate_lore(request: CharacterLoreCreationRequest):
     try:
         logger.info(f"Generating lore for request: {request.character_name}")
-        return get_character_lore(request)
+        result = get_character_lore(request)
+        
+        formatted_text = format_lore_data_to_text(result)
+        save_txt_to_system(formatted_text, result.name)
+        
+        return result
     except Exception as e:
         logger.error(f"Error generating lore: {str(e)}", exc_info=True)
         raise HTTPException(

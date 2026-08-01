@@ -51,7 +51,10 @@ def create_pdf_from_string(generated_lore: str) -> bytes:
 
 
 def save_txt_to_system(generated_lore: str, file_name: str):
-    if os.environ.get("ENVIRONMENT") == "prod":
+    env = os.environ.get("ENVIRONMENT")
+    logging.info(env)
+    
+    if env == "prod":
         logging.info("Skipping local system file save.")
         return
     

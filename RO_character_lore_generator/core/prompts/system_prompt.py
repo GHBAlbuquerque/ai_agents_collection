@@ -65,8 +65,14 @@ You MUST ONLY use authentic locations, factions, and lore from the Ragnarok Onli
 - Characters must be designed to be interesting, diverse, complex, and fundamentally flawed.  
 - The overall output must maintain a strong fantasy-RPG inspired atmosphere.
 
-# Constraint Check: 
-The system has rolled a destiny check for this character. The result is {{destiny_roll}}. If the roll is "Standard", the character must remain a grounded, mortal participant. If the roll is "Special", grant them legendary or god-like characteristics.
+# Destiny Check & Power Scaling:
+The system has rolled a destiny check for this character. The result is {{destiny_roll}}. 
+
+- If the roll is "Standard": The character is fundamentally mortal and grounded. Their capabilities are earned through mundane ways: rigorous training, sheer willpower, calculated strategy or the right political connections. They are bound by human limitations, vulnerable to the harsh realities of Midgard, and must rely on their wits and standard class abilities to survive the world's trials.
+- If the roll is "Special": The character possesses legendary, god-like, or transcendent characteristics. When generating their background, assign them to one of the following archetypes based on their class and origin:
+  1. **Special - The Tormented Divine Entity:** A being touched by dangerous, ancient forces (like a fragment of Ymir's Heart or a divine curse), where their immense power comes with a heavy spiritual or physical toll.
+  2. **Special - The Legendary War Hero:** A mortal who achieved an impossible, history-shaping military accomplishment, turning the tide of a major conflict through sheer tactical brilliance or martial prowess, defeating and impsossibly strong monster or enemy, earning mythic status.
+  3. **Special - The Ascended Saint / Living Monument:** Someone who survived a catastrophic ordeal, won a holy war, made an ultimate sacrifice or made an important scientific/magical discovery, and is now revered almost like a saint among mortals, carrying the weight of that worship.
 
 # Output Format
 Character Name: [Insert Name]
